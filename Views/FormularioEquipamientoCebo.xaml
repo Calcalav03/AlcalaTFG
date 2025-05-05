@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="AlcalaTFG.Views.FormularioEquipamientoCebo"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="Grey">
+
+    <Frame
+        Padding="20"
+        BackgroundColor="WhiteSmoke"
+        CornerRadius="15"
+        HeightRequest="550"
+        WidthRequest="850">
+
+        <VerticalStackLayout HeightRequest="500" WidthRequest="800">
+
+            <VerticalStackLayout.Shadow>
+                <Shadow
+                    Brush="Gray"
+                    Opacity=".4"
+                    Radius="99" />
+            </VerticalStackLayout.Shadow>
+
+            <!--  Título  -->
+            <Label
+                Margin="10"
+                FontFamily="Nature"
+                FontSize="35"
+                HorizontalOptions="Center"
+                Text="Tu equipo de pesca en acción 🧰🪝🎒"
+                TextColor="Black" />
+
+            <HorizontalStackLayout
+                Margin="0,30,0,0"
+                HeightRequest="400"
+                Spacing="30">
+
+                <!--  Formulario de Equipamiento  -->
+                <VerticalStackLayout
+                    Margin="20,0,0,0"
+                    HorizontalOptions="Center"
+                    WidthRequest="350">
+
+                    <Label
+                        FontFamily="Nature"
+                        FontSize="20"
+                        HorizontalOptions="Center"
+                        Text="Equipamiento"
+                        TextColor="Black" />
+
+                    <Label
+                        Margin="0,20,0,0"
+                        FontFamily="Nature"
+                        FontSize="15"
+                        Text="Tipo de equipo:"
+                        TextColor="Black" />
+                    <Entry
+                        BackgroundColor="LightGray"
+                        FontFamily="Comic Sans MS"
+                        Placeholder="Ej: caña, carrete..."
+                        TextColor="Gray" />
+
+                    <Label
+                        Margin="0,20,0,0"
+                        FontFamily="Nature"
+                        FontSize="15"
+                        Text="Marca:"
+                        TextColor="Black" />
+                    <Entry
+                        BackgroundColor="LightGray"
+                        FontFamily="Comic Sans MS"
+                        Placeholder="Marca del equipo"
+                        TextColor="Gray" />
+
+                    <Label
+                        Margin="0,20,0,0"
+                        FontFamily="Nature"
+                        FontSize="15"
+                        Text="Modelo:"
+                        TextColor="Black" />
+                    <Entry
+                        BackgroundColor="LightGray"
+                        FontFamily="Comic Sans MS"
+                        Placeholder="Modelo del equipo"
+                        TextColor="Gray" />
+
+                    <HorizontalStackLayout Margin="0,20,0,0" Spacing="10">
+                        <Button
+                            BackgroundColor="LightGreen"
+                            FontFamily="Nature"
+                            Text="Crear"
+                            WidthRequest="120" />
+                        <Button
+                            BackgroundColor="LightCoral"
+                            FontFamily="Nature"
+                            Text="Limpiar"
+                            WidthRequest="120" />
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+
+                <!--  Formulario de Cebo  -->
+                <VerticalStackLayout
+                    Margin="0,0,20,0"
+                    HorizontalOptions="Center"
+                    WidthRequest="350">
+
+                    <Label
+                        FontFamily="Nature"
+                        FontSize="20"
+                        HorizontalOptions="Center"
+                        Text="Cebo"
+                        TextColor="Black" />
+
+                    <Label
+                        Margin="0,20,0,0"
+                        FontFamily="Nature"
+                        FontSize="15"
+                        Text="Tipo de cebo:"
+                        TextColor="Black" />
+                    <Entry
+                        BackgroundColor="LightGray"
+                        FontFamily="Comic Sans MS"
+                        Placeholder="Ej: maíz, boilies..."
+                        TextColor="Gray" />
+
+                    <Label
+                        Margin="0,20,0,0"
+                        FontFamily="Nature"
+                        FontSize="15"
+                        Text="Descripción:"
+                        TextColor="Black" />
+                    <Editor
+                        BackgroundColor="LightGray"
+                        FontFamily="Comic Sans MS"
+                        HeightRequest="60"
+                        Placeholder="Detalles sobre el cebo utilizado"
+                        TextColor="Gray" />
+
+                    <HorizontalStackLayout Margin="0,20,0,0" Spacing="10">
+                        <Button
+                            BackgroundColor="LightGreen"
+                            FontFamily="Nature"
+                            Text="Crear"
+                            WidthRequest="120" />
+                        <Button
+                            BackgroundColor="LightCoral"
+                            FontFamily="Nature"
+                            Text="Limpiar"
+                            WidthRequest="120" />
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </Frame>
+</ContentPage>

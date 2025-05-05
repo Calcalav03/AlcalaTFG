@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="AlcalaTFG.Views.FormularioCaptura"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="Grey">
+    <Frame
+        Padding="20"
+        BackgroundColor="WhiteSmoke"
+        CornerRadius="15"
+        HeightRequest="550"
+        WidthRequest="850">
+        <VerticalStackLayout HeightRequest="500" WidthRequest="800">
+            <VerticalStackLayout.Shadow>
+                <Shadow
+                    Brush="Gray"
+                    Opacity=".4"
+                    Radius="99" />
+            </VerticalStackLayout.Shadow>
+
+            <!--  Título del formulario  -->
+            <Label
+                Margin="10"
+                FontFamily="Nature"
+                FontSize="35"
+                HorizontalOptions="Center"
+                Text="¿Qué atrapaste hoy? 🐟🎣📝"
+                TextColor="Black" />
+
+            <HorizontalStackLayout>
+
+
+
+                <VerticalStackLayout
+                    Margin="20,0,0,0"
+                    HeightRequest="550"
+                    HorizontalOptions="Start"
+                    WidthRequest="300">
+                    <!--  Selector de imagen  -->
+                    <ImageButton
+                        BorderColor="Black"
+                        HeightRequest="130"
+                        Source="defecto.png"
+                        WidthRequest="130" />
+
+                    <Label
+                        Margin="50,20,0,0"
+                        FontFamily="Nature"
+                        FontSize="15"
+                        HorizontalOptions="Start"
+                        Text="Peso:"
+                        TextColor="Black" />
+
+                    <Entry
+                        Margin="50,5,0,0"
+                        BackgroundColor="LightGray"
+                        FontFamily="Comic Sans MS"
+                        FontSize="15"
+                        HorizontalOptions="Start"
+                        Placeholder="Ingresa el peso del ejemplar"
+                        TextColor="Gray"
+                        WidthRequest="200" />
+
+                    <Label
+                        Margin="50,20,0,0"
+                        FontFamily="Nature"
+                        FontSize="15"
+                        HorizontalOptions="Start"
+                        Text="Tamaño:"
+                        TextColor="Black" />
+
+                    <Entry
+                        Margin="50,5,0,0"
+                        BackgroundColor="LightGray"
+                        FontFamily="Comic Sans MS"
+                        FontSize="15"
+                        HorizontalOptions="Start"
+                        Placeholder="Ingresa el tamaño del ejemplar"
+                        TextColor="Gray"
+                        WidthRequest="200" />
+
+                    <Label
+                        Margin="50,20,0,0"
+                        FontFamily="Nature"
+                        FontSize="15"
+                        HorizontalOptions="Start"
+                        Text="Temperatura:"
+                        TextColor="Black" />
+                    <Picker
+                        Margin="50,5,0,0"
+                        BackgroundColor="LightGray"
+                        HorizontalOptions="Start"
+                        TextColor="Gray"
+                        WidthRequest="120" />
+
+
+
+                    <!--  Lista de sabores de frutas  -->
+                </VerticalStackLayout>
+
+                <!--  Sección de entrada de datos  -->
+                <VerticalStackLayout>
+                    <!--  Campo para el nombre  -->
+                    <Label
+                        Margin="50,30,0,0"
+                        FontFamily="Nature"
+                        FontSize="15"
+                        HorizontalOptions="Start"
+                        Text="Especie:"
+                        TextColor="Black" />
+
+                    <Entry
+                        Margin="50,5,0,0"
+                        BackgroundColor="LightGray"
+                        FontFamily="Comic Sans MS"
+                        FontSize="15"
+                        HorizontalOptions="Start"
+                        Placeholder="Ingresa el nombre del ejemplar"
+                        TextColor="Gray"
+                        WidthRequest="200" />
+
+                    <!--  Campo para la descripción  -->
+                    <Label
+                        Margin="50,20,0,0"
+                        FontFamily="Nature"
+                        FontSize="15"
+                        HorizontalOptions="Start"
+                        Text="Ubicacion:"
+                        TextColor="Black" />
+                    <Editor
+                        Margin="50,5,0,0"
+                        BackgroundColor="LightGray"
+                        FontFamily="Comic Sans MS"
+                        FontSize="15"
+                        HeightRequest="50"
+                        HorizontalOptions="Start"
+                        Placeholder="Ingresa la Ubicacion"
+                        TextColor="Gray"
+                        WidthRequest="200" />
+
+                    <Label
+                        Margin="50,20,0,0"
+                        FontFamily="Nature"
+                        FontSize="15"
+                        HorizontalOptions="Start"
+                        Text="Fecha captura:"
+                        TextColor="Black" />
+                    <DatePicker
+                        Margin="50,5,0,0"
+                        BackgroundColor="LightGray"
+                        FontFamily="Comic Sans MS"
+                        FontSize="15"
+                        HeightRequest="50"
+                        HorizontalOptions="Start"
+                        TextColor="Gray"
+                        WidthRequest="200" />
+
+                    <Label
+                        Margin="50,20,0,0"
+                        FontFamily="Nature"
+                        FontSize="15"
+                        HorizontalOptions="Start"
+                        Text="Clima:"
+                        TextColor="Black" />
+                    <Picker
+                        Margin="50,5,0,0"
+                        BackgroundColor="LightGray"
+                        HorizontalOptions="Start"
+                        TextColor="Gray"
+                        WidthRequest="120" />
+
+
+
+
+
+                </VerticalStackLayout>
+
+
+                <VerticalStackLayout>
+                    <!--  Campo para la forma  -->
+                    <Label
+                        Margin="40,30,0,0"
+                        FontFamily="Nature"
+                        FontSize="15"
+                        Text="Equipamiento"
+                        TextColor="Black" />
+
+                    <Picker
+                        Margin="40,5,0,0"
+                        BackgroundColor="LightGray"
+                        HorizontalOptions="Start"
+                        TextColor="Gray"
+                        WidthRequest="120" />
+
+                    <!--  Campo para la bateria  -->
+                    <Label
+                        Margin="40,30,0,0"
+                        FontFamily="Nature"
+                        FontSize="15"
+                        Text="Cebo"
+                        TextColor="Black" />
+
+                    <Picker
+                        Margin="40,5,0,0"
+                        BackgroundColor="LightGray"
+                        HorizontalOptions="Start"
+                        TextColor="Gray"
+                        WidthRequest="120" />
+
+                    <StackLayout Orientation="Horizontal" Spacing="0">
+                        <Label
+                            Margin="40,35,0,0"
+                            FontFamily="Nature"
+                            FontSize="13"
+                            Text="¿Estaba lloviendo?"
+                            TextColor="Black" />
+                        <CheckBox Margin="5,20,0,0" BackgroundColor="LightGray" />
+                    </StackLayout>
+                    <Button
+                        Margin="5,20,0,0"
+                        BackgroundColor="LightGreen"
+                        FontFamily="Nature"
+                        Text="Crear"
+                        WidthRequest="120" />
+                    <Button
+                        Margin="5,20,0,0"
+                        BackgroundColor="LightCoral"
+                        FontFamily="Nature"
+                        Text="Limpiar"
+                        WidthRequest="120" />
+
+
+                </VerticalStackLayout>
+
+
+
+
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </Frame>
+</ContentPage>

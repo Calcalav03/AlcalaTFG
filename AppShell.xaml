@@ -4,12 +4,24 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:AlcalaTFG"
-    Shell.FlyoutBehavior="Disabled"
-    Title="AlcalaTFG">
+    xmlns:views="clr-namespace:AlcalaTFG.Views"
+    Title="AlcalaTFG"
+    Shell.FlyoutBehavior="Disabled">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <TabBar>
+        <Tab Title="Login">
+            <ShellContent ContentTemplate="{DataTemplate local:MainPage}" Route="Login" />
+        </Tab>
+
+        <Tab Title="Menu Principal" Shell.TabBarTitleColor="Aqua">
+            <ShellContent ContentTemplate="{DataTemplate views:MenuPrincipal}" Route="MenuPrincipal" />
+        </Tab>
+        <Tab Title="Formulario Captura" Shell.TabBarTitleColor="Aqua">
+            <ShellContent ContentTemplate="{DataTemplate views:FormularioCaptura}" Route="FormularioCaptura" />
+        </Tab>
+        <Tab Title="Formulario Cebo y Equipamiento" Shell.TabBarTitleColor="Aqua">
+            <ShellContent ContentTemplate="{DataTemplate views:FormularioEquipamientoCebo}" Route="FormularioCeboEquipamiento" />
+        </Tab>
+    </TabBar>
 
 </Shell>

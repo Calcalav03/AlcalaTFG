@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="AlcalaTFG.Views.MenuPrincipal"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="PaleGoldenrod">
+    <Grid ColumnDefinitions="*" RowDefinitions="150,*">
+        <Frame Margin="5" BackgroundColor="AliceBlue" />
+
+        <Grid
+            Grid.Row="1"
+            ColumnDefinitions="*,*"
+            RowDefinitions=" *">
+            <Frame
+                Grid.Row="1"
+                Grid.Column="0"
+                Margin="5"
+                Padding="0">
+                <WebView x:Name="mapWebView" Source="https://maps.google.com/?cid=8906967143109048994" />
+            </Frame>
+
+            <Frame
+                Grid.Row="1"
+                Grid.Column="1"
+                Margin="5"
+                Padding="0">
+                <WebView x:Name="aemetWebView" Source="https://www.aemet.es/es/eltiempo/prediccion/municipios/ocana-id45121" />
+            </Frame>
+        </Grid>
+    </Grid>
+</ContentPage>
