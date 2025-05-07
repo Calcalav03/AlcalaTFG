@@ -3,7 +3,12 @@
     x:Class="AlcalaTFG.Views.FormularioEquipamientoCebo"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    BackgroundColor="Grey">
+    xmlns:models="clr-namespace:AlcalaTFG.Models"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:viewmodel="clr-namespace:AlcalaTFG.ViewModels"
+    x:DataType="viewmodel:FormularioEquipamientoCeboViewModel"
+    BackgroundColor="Grey"
+    BindingContext="{viewmodel:FormularioEquipamientoCeboViewModel}">
 
     <Frame
         Padding="20"
@@ -58,6 +63,7 @@
                         BackgroundColor="LightGray"
                         FontFamily="Comic Sans MS"
                         Placeholder="Ej: caña, carrete..."
+                        Text="{Binding TipoEquip}"
                         TextColor="Gray" />
 
                     <Label
@@ -70,6 +76,7 @@
                         BackgroundColor="LightGray"
                         FontFamily="Comic Sans MS"
                         Placeholder="Marca del equipo"
+                        Text="{Binding Marca}"
                         TextColor="Gray" />
 
                     <Label
@@ -82,16 +89,19 @@
                         BackgroundColor="LightGray"
                         FontFamily="Comic Sans MS"
                         Placeholder="Modelo del equipo"
+                        Text="{Binding Modelo}"
                         TextColor="Gray" />
 
                     <HorizontalStackLayout Margin="0,20,0,0" Spacing="10">
                         <Button
                             BackgroundColor="LightGreen"
+                            Command="{Binding CrearEquipamientoCommand}"
                             FontFamily="Nature"
                             Text="Crear"
                             WidthRequest="120" />
                         <Button
                             BackgroundColor="LightCoral"
+                            Command="{Binding LimpiarFormularioCeboCommand}"
                             FontFamily="Nature"
                             Text="Limpiar"
                             WidthRequest="120" />
@@ -121,6 +131,7 @@
                         BackgroundColor="LightGray"
                         FontFamily="Comic Sans MS"
                         Placeholder="Ej: maíz, boilies..."
+                        Text="{Binding TipoCebo}"
                         TextColor="Gray" />
 
                     <Label
@@ -134,16 +145,19 @@
                         FontFamily="Comic Sans MS"
                         HeightRequest="60"
                         Placeholder="Detalles sobre el cebo utilizado"
+                        Text="{Binding Descripcion}"
                         TextColor="Gray" />
 
                     <HorizontalStackLayout Margin="0,20,0,0" Spacing="10">
                         <Button
                             BackgroundColor="LightGreen"
+                            Command="{Binding CrearCeboCommand}"
                             FontFamily="Nature"
                             Text="Crear"
                             WidthRequest="120" />
                         <Button
                             BackgroundColor="LightCoral"
+                            Command="{Binding LimpiarFormularioCeboCommand}"
                             FontFamily="Nature"
                             Text="Limpiar"
                             WidthRequest="120" />

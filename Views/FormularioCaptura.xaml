@@ -3,7 +3,11 @@
     x:Class="AlcalaTFG.Views.FormularioCaptura"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    BackgroundColor="Grey">
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:viewmodel="clr-namespace:AlcalaTFG.ViewModels"
+    x:DataType="viewmodel:FormularioCapturaViewModel"
+    BackgroundColor="Grey"
+    BindingContext="{viewmodel:FormularioCapturaViewModel}">
     <Frame
         Padding="20"
         BackgroundColor="WhiteSmoke"
@@ -39,6 +43,7 @@
                     <!--  Selector de imagen  -->
                     <ImageButton
                         BorderColor="Black"
+                        Command="{Binding SeleciconarImagenCommand}"
                         HeightRequest="130"
                         Source="defecto.png"
                         WidthRequest="130" />

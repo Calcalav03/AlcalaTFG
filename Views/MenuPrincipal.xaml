@@ -3,7 +3,7 @@
     x:Class="AlcalaTFG.Views.MenuPrincipal"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    BackgroundColor="PaleGoldenrod">
+    BackgroundColor="grey">
     <Grid ColumnDefinitions="*" RowDefinitions="150,*">
         <Frame Margin="5" BackgroundColor="AliceBlue" />
 
