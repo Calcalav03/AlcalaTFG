@@ -4,6 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:ffimage="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
     xmlns:viewmodel="clr-namespace:AlcalaTFG.ViewModels"
     x:DataType="viewmodel:FormularioCapturaViewModel"
     BackgroundColor="Grey"
@@ -42,10 +43,10 @@
                     WidthRequest="300">
                     <!--  Selector de imagen  -->
                     <ImageButton
-                        BorderColor="Black"
-                        Command="{Binding SeleciconarImagenCommand}"
+                        
+                        Command="{Binding SeleccionarImagenCommand}"
                         HeightRequest="130"
-                        Source="defecto.png"
+                        Source="{Binding ImagenUrl}"
                         WidthRequest="130" />
 
                     <Label
@@ -225,6 +226,7 @@
                         Margin="5,20,0,0"
                         BackgroundColor="LightGreen"
                         FontFamily="Nature"
+                        Command="{Binding CrearCapturaCommand}"
                         Text="Crear"
                         WidthRequest="120" />
                     <Button
