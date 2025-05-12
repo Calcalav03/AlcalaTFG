@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Maui.LifecycleEvents;
 using Microsoft.UI;
 using Microsoft.UI.Windowing;
+using Mopups.Hosting;
 using Windows.Graphics;
 
 namespace AlcalaTFG
@@ -19,7 +20,7 @@ namespace AlcalaTFG
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-                }).UseMauiCommunityToolkit().UseFFImageLoading();
+                }).UseMauiCommunityToolkit().UseFFImageLoading().ConfigureMopups();
 
 #if DEBUG
     		builder.Logging.AddDebug();

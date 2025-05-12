@@ -2,7 +2,14 @@
 <ContentPage
     x:Class="AlcalaTFG.MainPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:viewmodel="clr-namespace:AlcalaTFG.ViewModels"
+    x:DataType="viewmodel:MainViewModel"
+    BindingContext="{viewmodel:MainViewModel}"
+    Shell.TabBarIsVisible="False"
+    x:Name="main"
+    >
 
     <Frame
         Padding="20"
@@ -15,7 +22,11 @@
             x:Name="webview"
             HeightRequest="550"
             Source="http://127.0.0.1:5000/form_login"
-            WidthRequest="950" />
+            WidthRequest="950" >
+            <WebView.Behaviors>
+                <toolkit:EventToCommandBehavior Command="{Binding NavigatedCommand}" EventName="Navigated" BindingContext="{Binding Source={x:Reference main},Path=BindingContext}" CommandParameter="{Binding Source={x:Reference webview}}" />
+            </WebView.Behaviors>
+        </WebView>
 
     </Frame>
 
