@@ -21,7 +21,7 @@
         <WebView
             x:Name="webview"
             HeightRequest="550"
-            Source="http://127.0.0.1:5000/form_login"
+            Source="http://127.0.0.1:5000/"
             WidthRequest="950" >
             <WebView.Behaviors>
                 <toolkit:EventToCommandBehavior Command="{Binding NavigatedCommand}" EventName="Navigated" BindingContext="{Binding Source={x:Reference main},Path=BindingContext}" CommandParameter="{Binding Source={x:Reference webview}}" />

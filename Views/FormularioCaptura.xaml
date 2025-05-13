@@ -65,7 +65,9 @@
                         HorizontalOptions="Start"
                         Placeholder="Ingresa el peso del ejemplar"
                         TextColor="Gray"
-                        WidthRequest="200" />
+                        WidthRequest="200" 
+                        Keyboard="Numeric"
+                        Text="{Binding Peso}"/>
 
                     <Label
                         Margin="50,20,0,0"
@@ -83,7 +85,8 @@
                         HorizontalOptions="Start"
                         Placeholder="Ingresa el tamaño del ejemplar"
                         TextColor="Gray"
-                        WidthRequest="200" />
+                        WidthRequest="200"
+                        Text="{Binding Tamano}"/>
 
                     <Label
                         Margin="50,20,0,0"
@@ -97,7 +100,28 @@
                         BackgroundColor="LightGray"
                         HorizontalOptions="Start"
                         TextColor="Gray"
-                        WidthRequest="120" />
+                        WidthRequest="120"  SelectedItem="{Binding Temperatura}">
+                        <Picker.Items>
+                            <x:String>-10°C</x:String>
+                            <x:String>-7°C</x:String>
+                            <x:String>-4°C</x:String>
+                            <x:String>-1°C</x:String>
+                            <x:String>2°C</x:String>
+                            <x:String>5°C</x:String>
+                            <x:String>8°C</x:String>
+                            <x:String>11°C</x:String>
+                            <x:String>14°C</x:String>
+                            <x:String>17°C</x:String>
+                            <x:String>20°C</x:String>
+                            <x:String>23°C</x:String>
+                            <x:String>26°C</x:String>
+                            <x:String>29°C</x:String>
+                            <x:String>32°C</x:String>
+                            <x:String>35°C</x:String>
+                            <x:String>38°C</x:String>
+                            <x:String>40°C</x:String>
+                        </Picker.Items>
+                    </Picker>
 
 
 
@@ -108,7 +132,7 @@
                 <VerticalStackLayout>
                     <!--  Campo para el nombre  -->
                     <Label
-                        Margin="50,30,0,0"
+                        Margin="50,20,0,0"
                         FontFamily="Nature"
                         FontSize="15"
                         HorizontalOptions="Start"
@@ -123,17 +147,18 @@
                         HorizontalOptions="Start"
                         Placeholder="Ingresa el nombre del ejemplar"
                         TextColor="Gray"
-                        WidthRequest="200" />
+                        WidthRequest="200" 
+                        Text="{Binding Nombre}"/>
 
                     <!--  Campo para la descripción  -->
                     <Label
-                        Margin="50,20,0,0"
+                        Margin="50,10,0,0"
                         FontFamily="Nature"
                         FontSize="15"
                         HorizontalOptions="Start"
                         Text="Ubicacion:"
                         TextColor="Black" />
-                    <Editor
+                    <Entry
                         Margin="50,5,0,0"
                         BackgroundColor="LightGray"
                         FontFamily="Comic Sans MS"
@@ -142,10 +167,11 @@
                         HorizontalOptions="Start"
                         Placeholder="Ingresa la Ubicacion"
                         TextColor="Gray"
-                        WidthRequest="200" />
+                        WidthRequest="200" 
+                        Text="{Binding Ubicacion}"/>
 
                     <Label
-                        Margin="50,20,0,0"
+                        Margin="50,10,0,0"
                         FontFamily="Nature"
                         FontSize="15"
                         HorizontalOptions="Start"
@@ -159,10 +185,12 @@
                         HeightRequest="50"
                         HorizontalOptions="Start"
                         TextColor="Gray"
-                        WidthRequest="200" />
+                        WidthRequest="200" 
+                        Date="{Binding Fecha, Mode=TwoWay}"
+                        />
 
                     <Label
-                        Margin="50,20,0,0"
+                        Margin="50,10,0,0"
                         FontFamily="Nature"
                         FontSize="15"
                         HorizontalOptions="Start"
@@ -173,11 +201,37 @@
                         BackgroundColor="LightGray"
                         HorizontalOptions="Start"
                         TextColor="Gray"
-                        WidthRequest="120" />
+                        WidthRequest="120" 
+                        SelectedItem="{Binding Clima}">
+                        <Picker.Items>
+                            <x:String>Soleado</x:String>
+                            <x:String>Nublado</x:String>
+                            <x:String>Lluvioso</x:String>
+                            <x:String>Tormenta</x:String>
+                            <x:String>Nevando</x:String>
+                            <x:String>Despejado</x:String>
+                            <x:String>Niebla</x:String>
+                            <x:String>Ventoso</x:String>
+                        </Picker.Items>
+                    </Picker>
+                    <Label
+                        Margin="50,10,0,0"
+                        FontFamily="Nature"
+                        FontSize="15"
+                        HorizontalOptions="Start"
+                        Text="Metodo de Pesca:"
+                        TextColor="Black" />
 
-
-
-
+                    <Entry
+                        Margin="50,5,0,0"
+                        BackgroundColor="LightGray"
+                        FontFamily="Comic Sans MS"
+                        FontSize="15"
+                        HorizontalOptions="Start"
+                        Placeholder="Ingresa el metodo de pesca empleado"
+                        TextColor="Gray"
+                        WidthRequest="200"
+                        Text="{Binding Metodo}"/>
 
                 </VerticalStackLayout>
 
@@ -185,7 +239,7 @@
                 <VerticalStackLayout>
                     <!--  Campo para la forma  -->
                     <Label
-                        Margin="40,30,0,0"
+                        Margin="40,20,0,0"
                         FontFamily="Nature"
                         FontSize="15"
                         Text="Equipamiento"
@@ -235,7 +289,6 @@
                         FontFamily="Nature"
                         Text="Limpiar"
                         WidthRequest="120" />
-
 
                 </VerticalStackLayout>
 

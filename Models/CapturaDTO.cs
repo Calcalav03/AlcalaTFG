@@ -34,7 +34,7 @@ namespace AlcalaTFG.Models
         public string Ubicacion { get; set; }
 
         [JsonProperty("fecha")]
-        public DateTime Fecha { get; set; }
+        public DateTimeOffset Fecha { get; set; } = DateTimeOffset.UtcNow;
 
         [JsonProperty("imagenUrl")]
         public string ImagenUrl { get; set; }

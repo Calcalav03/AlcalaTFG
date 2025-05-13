@@ -2,6 +2,7 @@
 using AlcalaTFG.Models;
 using AlcalaTFG.services;
 using AlcalaTFG.Utils;
+
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System;
@@ -28,9 +29,9 @@ namespace AlcalaTFG.ViewModels
 
 
         [ObservableProperty]
-        private string peso;
+        private decimal peso;
         [ObservableProperty]
-        private string tamano;
+        private decimal tamano;
         [ObservableProperty]
         private string temperatura;
         [ObservableProperty]
@@ -38,7 +39,7 @@ namespace AlcalaTFG.ViewModels
         [ObservableProperty]
         private string ubicacion;
         [ObservableProperty]
-        private string fecha;
+        private DateTime fecha=DateTime.Today;
         [ObservableProperty]
         private string clima;
         [ObservableProperty]
@@ -47,6 +48,8 @@ namespace AlcalaTFG.ViewModels
         private string cebo;
         [ObservableProperty]
         private string lloviendo;
+        [ObservableProperty]
+        private string metodo;
 
 
         [RelayCommand]
@@ -54,34 +57,73 @@ namespace AlcalaTFG.ViewModels
         {
             string message = "Ocurrió un error al crear la captura: ";
             string bien = "captura creada correctamente!";
+            
 
             try
             {
-                //if (string.IsNullOrWhiteSpace(TipoCebo) || string.IsNullOrWhiteSpace(Descripcion))
-                //{
-                //    await App.Current.MainPage.DisplayAlert("Error", "El tipo de cebo y la descripción son obligatorios", "Aceptar");
-                //    return;
-                //}
+                // Lista para acumular errores
+                List<string> errores = new List<string>();
 
-                var capturaDto = new CapturaDTO(
-                usuario: new CapturaDTO.UsuarioDto(1), // Aquí creamos un nuevo objeto UsuarioDto directamente en el constructor
-                especie: "Carpa",
-                peso: 54,
-                tamano: 80,
-                ubicacion: "Embalse de Entrepeñas",
-                fecha: DateTime.UtcNow,
-                imagenUrl: Convert.ToBase64String(imagenBytes),
-                cebos: new HashSet<CapturaDTO.CeboDto1> { new CapturaDTO.CeboDto1(1), new CapturaDTO.CeboDto1(2) }, // Nuevos objetos de CeboDto1
-                equipamientos: new HashSet<CapturaDTO.EquipamientoDto1> { new CapturaDTO.EquipamientoDto1(1) }, // Nuevos objetos de EquipamientoDto1
-                climas: new HashSet<CapturaDTO.ClimaDto>
+                // Validación de cada campo
+                if (string.IsNullOrWhiteSpace(Nombre))
+                    errores.Add("El nombre de la especie es obligatorio.");
+
+                if (!decimal.TryParse(Peso.ToString(), out _) || Peso <= 0)
+                    errores.Add("El peso debe ser un valor numérico positivo.");
+
+                if (!decimal.TryParse(Tamano.ToString(), out _) || Tamano <= 0)
+                    errores.Add("El tamaño debe ser un valor numérico positivo.");
+
+                if (string.IsNullOrWhiteSpace(Ubicacion))
+                    errores.Add("La ubicación es obligatoria.");
+
+                if (Fecha == default)
+                    errores.Add("La fecha es obligatoria.");
+
+                if (imagenBytes == null || imagenBytes.Length == 0)
+                    errores.Add("La imagen es obligatoria.");
+
+                if (Temperatura == null)
+                    errores.Add("La temperatura es obligatoria.");
+
+                if (string.IsNullOrWhiteSpace(Clima))
+                    errores.Add("El clima es obligatorio.");
+
+                if (string.IsNullOrWhiteSpace(Metodo))
+                    errores.Add("El método de pesca es obligatorio.");
+
+                // Si hay errores, los mostramos y salimos
+                if (errores.Count > 0)
                 {
-                    new CapturaDTO.ClimaDto("22°C", "Despejado", true) // Nuevo objeto de ClimaDto
-                },
-                metodosPescas: new HashSet<CapturaDTO.MetodosPescaDto> { new CapturaDTO.MetodosPescaDto("Spinning") } // Nuevo objeto de MetodosPescaDto
-            );
+                    await App.Current.MainPage.DisplayAlert("Error", string.Join("\n", errores), "Aceptar");
+                    return;
+                }
 
-                // Crear el RequestModel
-                var request = new RequestModel
+                // Si no hay errores, creamos el objeto
+                var capturaDto = new CapturaDTO(
+                    usuario: new CapturaDTO.UsuarioDto(1), // Aquí creamos un nuevo objeto UsuarioDto directamente en el constructor
+                    especie: Nombre,
+                    peso: Peso,
+                    tamano: Tamano,
+                    ubicacion: Ubicacion,
+                    fecha: Fecha.ToUniversalTime().AddDays(1),
+                    imagenUrl: Convert.ToBase64String(imagenBytes),
+                    cebos: new HashSet<CapturaDTO.CeboDto1> { new CapturaDTO.CeboDto1(1) }, // Nuevos objetos de CeboDto1
+                    equipamientos: new HashSet<CapturaDTO.EquipamientoDto1> { new CapturaDTO.EquipamientoDto1(1) }, // Nuevos objetos de EquipamientoDto1
+                    climas: new HashSet<CapturaDTO.ClimaDto>
+                    {
+                        new CapturaDTO.ClimaDto(Temperatura, Clima, true) // Nuevo objeto de ClimaDto
+                    },
+                    metodosPescas: new HashSet<CapturaDTO.MetodosPescaDto> { new CapturaDTO.MetodosPescaDto(Metodo) } // Nuevo objeto de MetodosPescaDto
+                );
+
+                // Aquí puedes continuar con el proceso de guardado o cualquier otra lógica que necesites.
+            
+           
+
+
+            // Crear el RequestModel
+            var request = new RequestModel
                 {
                     Data = capturaDto,
                     Method = "POST",
