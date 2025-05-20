@@ -1,15 +1,20 @@
 ﻿using AlcalaTFG.models;
 using AlcalaTFG.Models;
 using AlcalaTFG.services;
+using AlcalaTFG.Services;
 using AlcalaTFG.Utils;
 
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace AlcalaTFG.ViewModels
@@ -43,14 +48,116 @@ namespace AlcalaTFG.ViewModels
         [ObservableProperty]
         private string clima;
         [ObservableProperty]
-        private string equipamiento;
+        private ObservableCollection<EquipamientoInfo> equipamientos;
         [ObservableProperty]
-        private string cebo;
+        private EquipamientoInfo equipamiento;
         [ObservableProperty]
-        private string lloviendo;
+        private ObservableCollection<CeboInfo> cebos;
+        [ObservableProperty]
+        private CeboInfo cebo;
+        [ObservableProperty]
+        private bool lloviendo;
         [ObservableProperty]
         private string metodo;
+        [ObservableProperty]
+        private int id;
 
+
+        public FormularioCapturaViewModel()
+        {
+            CargarDatos();
+        }
+        [RelayCommand]
+        public void CargarDatos()
+        {
+            RequestIdUsu();
+            RequestCebos();
+            RequestEquipamientos();
+        }
+
+        //METODO PARA OBTENER LOS CEBOS
+        [RelayCommand]
+        public async void RequestCebos()
+        {
+            RequestModel requestModel = new RequestModel
+            {
+                Method = "GET",
+                Route = "http://localhost:8089/jpa/cebos",
+                Data = string.Empty
+            };
+
+
+            ResponseModel response = await APIService.ExecuteRequestJPA(requestModel);
+
+            if (response.Success.Equals(0))
+            {
+                try
+                {
+                    Cebos = JsonConvert.DeserializeObject<ObservableCollection<CeboInfo>>(response.Data.ToString());
+                }
+                catch (Exception ex) { }
+            }
+        }
+
+        public async void RequestIdUsu()
+        {
+            string userLogin = AuthService.Instance.UserLogin;
+
+            if (string.IsNullOrEmpty(userLogin))
+            {
+                Debug.WriteLine("UserLogin no está establecido.");
+                return;
+            }
+
+            RequestModel requestModel = new RequestModel
+            {
+                Method = "GET",
+                Route = $"http://localhost:8089/jpa/usuarioId/{userLogin}",
+                Data = string.Empty
+            };
+
+            ResponseModel response = await APIService.ExecuteRequestJPA(requestModel);
+
+            if (response.Success.Equals(0))
+            {
+                try
+                {
+                    dynamic jsonResponse = JsonConvert.DeserializeObject<dynamic>(response.Data.ToString());
+                    Id = (int)jsonResponse;
+                    Debug.WriteLine($"ID del usuario obtenido: {Id}");
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"Error al deserializar el ID del usuario: {ex.Message}");
+                }
+            }
+        }
+
+
+
+        //METODO PARA OBTENER LOS EQUIPAMIENTOS
+        [RelayCommand]
+        public async void RequestEquipamientos()
+        {
+            RequestModel requestModel = new RequestModel
+            {
+                Method = "GET",
+                Route = "http://localhost:8089/jpa/equipamientos",
+                Data = string.Empty
+            };
+
+
+            ResponseModel response = await APIService.ExecuteRequestJPA(requestModel);
+
+            if (response.Success.Equals(0))
+            {
+                try
+                {
+                    Equipamientos = JsonConvert.DeserializeObject<ObservableCollection<EquipamientoInfo>>(response.Data.ToString());
+                }
+                catch (Exception ex) { }
+            }
+        }
 
         [RelayCommand]
         public async Task CrearCaptura()
@@ -101,18 +208,18 @@ namespace AlcalaTFG.ViewModels
 
                 // Si no hay errores, creamos el objeto
                 var capturaDto = new CapturaDTO(
-                    usuario: new CapturaDTO.UsuarioDto(1), // Aquí creamos un nuevo objeto UsuarioDto directamente en el constructor
+                    usuario: new CapturaDTO.UsuarioDto(Id), // Aquí creamos un nuevo objeto UsuarioDto directamente en el constructor
                     especie: Nombre,
                     peso: Peso,
                     tamano: Tamano,
                     ubicacion: Ubicacion,
                     fecha: Fecha.ToUniversalTime().AddDays(1),
                     imagenUrl: Convert.ToBase64String(imagenBytes),
-                    cebos: new HashSet<CapturaDTO.CeboDto1> { new CapturaDTO.CeboDto1(1) }, // Nuevos objetos de CeboDto1
-                    equipamientos: new HashSet<CapturaDTO.EquipamientoDto1> { new CapturaDTO.EquipamientoDto1(1) }, // Nuevos objetos de EquipamientoDto1
+                    cebos: new HashSet<CapturaDTO.CeboDto1> { new CapturaDTO.CeboDto1(Cebo.Id) }, // Nuevos objetos de CeboDto1
+                    equipamientos: new HashSet<CapturaDTO.EquipamientoDto1> { new CapturaDTO.EquipamientoDto1(Equipamiento.Id) }, // Nuevos objetos de EquipamientoDto1
                     climas: new HashSet<CapturaDTO.ClimaDto>
                     {
-                        new CapturaDTO.ClimaDto(Temperatura, Clima, true) // Nuevo objeto de ClimaDto
+                        new CapturaDTO.ClimaDto(Temperatura, Clima, Lloviendo) // Nuevo objeto de ClimaDto
                     },
                     metodosPescas: new HashSet<CapturaDTO.MetodosPescaDto> { new CapturaDTO.MetodosPescaDto(Metodo) } // Nuevo objeto de MetodosPescaDto
                 );
@@ -138,7 +245,7 @@ namespace AlcalaTFG.ViewModels
 
 
 
-                LimpiarFormularioCebo();
+                LimpiarFormulario();
 
 
             }
@@ -148,16 +255,7 @@ namespace AlcalaTFG.ViewModels
                 Debug.WriteLine(message + ex.Message);
             }
         }
-        [RelayCommand]
-        public void LimpiarFormularioCebo()
-        {
-            //TipoCebo = string.Empty;
-            //Descripcion = string.Empty;
-        }
-
-
-
-         // MÉTODO PARA SELECCIONAR LA IMAGEN
+        // MÉTODO PARA SELECCIONAR LA IMAGEN
         [RelayCommand]
         public async void SeleccionarImagen()
         {
@@ -195,6 +293,24 @@ namespace AlcalaTFG.ViewModels
             }
         }
 
-       
+        [RelayCommand]
+        public void LimpiarFormulario()
+        {
+            Peso = 0;
+            Tamano = 0;
+            //Modelo = string.Empty;
+            Fecha = DateTime.Today;
+            Temperatura = null;
+            Nombre=string.Empty;
+            Ubicacion= string.Empty;
+            Clima=null;
+            Equipamiento=null;
+            Cebo=null;
+            Lloviendo=false;
+            Metodo= string.Empty;
+            ImagenUrl = "defecto.png";
+            ImagenBytes = null;
+
+        }
     }
 }

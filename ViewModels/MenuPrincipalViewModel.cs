@@ -1,4 +1,5 @@
-﻿using AlcalaTFG.Views;
+﻿using AlcalaTFG.Services;
+using AlcalaTFG.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System;
@@ -28,9 +29,17 @@ namespace AlcalaTFG.ViewModels
         [RelayCommand]
         private async void CambiarVistaL()
         {
-            // Aquí navegas a otra vista (por ejemplo, a "NuevaVistaPage")
+            // Borrar los datos del AuthService 
+            AuthService.Instance.ClearCredentials();
+
+            // Eliminar las credenciales almacenadas
+            SecureStorage.Remove("auth_token");
+            SecureStorage.Remove("user");
+
+            // Navegar a la vista de Login
             await Shell.Current.GoToAsync("///Login");
         }
+
         //[RelayCommand]
         //private async void CambiarVistaFC()
         //{
