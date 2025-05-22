@@ -40,12 +40,12 @@ namespace AlcalaTFG.ViewModels
             await Shell.Current.GoToAsync("///Login");
         }
 
-        //[RelayCommand]
-        //private async void CambiarVistaFC()
-        //{
-        //    // Aquí navegas a otra vista (por ejemplo, a "NuevaVistaPage")
-        //    await Shell.Current.GoToAsync("///FormularioCaptura");
-        //}
+        [RelayCommand]
+        private async void CambiarVistaGV()
+        {
+            // Aquí navegas a otra vista (por ejemplo, a "NuevaVistaPage")
+            await Shell.Current.GoToAsync("///CapturaGlobalView");
+        }
         //[RelayCommand]
         //private async void CambiarVistaFC()
         //{

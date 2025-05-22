@@ -33,19 +33,21 @@
                     Grid.Column="3"
                     HeightRequest="120"
                     Source="mostrartodos.png"
-                    WidthRequest="120" />
+                    WidthRequest="120"
+                    Command="{Binding CambiarVistaGVCommand}"/>
                 <ImageButton
                     Grid.Row="1"
                     Grid.Column="4"
                     HeightRequest="120"
                     Source="mostrarusu.png"
-                    WidthRequest="120" />
+                    WidthRequest="120"
+                    Command="{Binding CambiarVistaGVCommand}"/>
                 <ImageButton
                     Grid.Row="1"
                     Grid.Column="5"
                     Command="{Binding CambiarVistaLCommand}"
                     HeightRequest="120"
-                    Source="defecto.png"
+                    Source="irlogin.png"
                     WidthRequest="120" />
 
 
