@@ -4,10 +4,13 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:AlcalaTFG.Converter"
-    xmlns:models="clr-namespace:AlcalaTFG.Models"
     xmlns:mopups="clr-namespace:Mopups.Pages;assembly=Mopups"
+    xmlns:models="clr-namespace:AlcalaTFG.Models"
+    xmlns:viewmodel="clr-namespace:AlcalaTFG.ViewModels"
     BackgroundColor="#80000000"
-    CloseWhenBackgroundIsClicked="True">
+    CloseWhenBackgroundIsClicked="True"
+    x:DataType="viewmodel:CapturaUsuViewModel"
+    >
 
     <mopups:PopupPage.Resources>
         <ResourceDictionary>
@@ -21,188 +24,63 @@
             BackgroundColor="White"
             CornerRadius="20"
             HasShadow="True"
-            HorizontalOptions="Center"
+            WidthRequest="300"
             VerticalOptions="Center"
-            WidthRequest="900">
+            HorizontalOptions="Center">
 
-            <Grid
-                ColumnDefinitions="1*,1*,1*"
-                ColumnSpacing="20"
-                RowDefinitions="Auto">
-                <!--  Columna 1: Imagen + datos generales  -->
-                <VerticalStackLayout
-                    Grid.Column="0"
-                    Margin="50,0,0,0"
-                    Spacing="10">
-                    <Frame
-                        Padding="0"
-                        BorderColor="#ccc"
-                        CornerRadius="15"
-                        HasShadow="True"
+            <VerticalStackLayout Spacing="20" HorizontalOptions="Center">
+                <!-- Imagen -->
+                <Frame
+                    Padding="0"
+                    CornerRadius="15"
+                    HeightRequest="150"
+                    WidthRequest="150"
+                    HasShadow="True"
+                    BorderColor="#ccc">
+                    <Image
+                        Aspect="AspectFill"
+                        Source="{Binding CapturaSelected.ImagenUrl, Converter={StaticResource Base64ImageConverter}}"
                         HeightRequest="150"
-                        HorizontalOptions="Center"
-                        WidthRequest="200">
-                        <Image
-                            Aspect="AspectFill"
-                            HeightRequest="150"
-                            Source="{Binding ImagenUrl, Converter={StaticResource Base64ImageConverter}}"
-                            WidthRequest="200" />
-                    </Frame>
+                        WidthRequest="150"
+                        />
+                </Frame>
 
-                    <Label
-                        FontAttributes="Bold"
-                        FontSize="20"
-                        HorizontalTextAlignment="Center"
-                        Text="{Binding Especie}"
-                        TextColor="Black" />
-                    <Label
-                        FontSize="14"
-                        Text="{Binding Fecha, StringFormat='Fecha: {0:dd/MM/yyyy}'}"
-                        TextColor="Black" />
-                    <Label
-                        FontSize="14"
-                        Text="{Binding Peso, StringFormat='Peso: {0} kg'}"
-                        TextColor="Black" />
-                    <Label
-                        FontSize="14"
-                        Text="{Binding Tamano, StringFormat='Tamaño: {0} cm'}"
-                        TextColor="Black" />
-                    <Label
-                        FontSize="14"
-                        Text="{Binding Ubicacion}"
-                        TextColor="Black" />
-                </VerticalStackLayout>
+                <!-- Nombre -->
+                <Label
+                    Text="{Binding CapturaSelected.Especie}"
+                    FontSize="20"
+                    FontAttributes="Bold"
+                    TextColor="Black"
+                    HorizontalTextAlignment="Center" />
 
-                <!--  Columna 2: Usuario, Cebos, Métodos  -->
-                <VerticalStackLayout
-                    Grid.Column="1"
-                    Margin="50,0,0,0"
-                    Spacing="10">
-                    <Label
-                        FontAttributes="Bold"
-                        FontSize="16"
-                        Text="Usuario"
-                        TextColor="Black" />
-                    <Label
-                        FontSize="14"
-                        Text="{Binding Usuario.Nombre}"
-                        TextColor="Black" />
+                <!-- Botones Editar y Borrar -->
+                <HorizontalStackLayout HorizontalOptions="Center" Spacing="15">
+                    <Button
+                        Text="Editar"
+                        BackgroundColor="#4CAF50"
+                        TextColor="White"
+                        CornerRadius="15"
+                        WidthRequest="100"
+                         />
+                    <Button 
+                        Text="Borrar"
+                        BackgroundColor="#F44336"
+                        TextColor="White"
+                        CornerRadius="15"
+                        WidthRequest="100"
+                        Command="{Binding DeleteVaperCommand}"
+                        />
+                </HorizontalStackLayout>
 
-
-                    <Label
-                        FontAttributes="Bold"
-                        FontSize="16"
-                        Text="Cebo utilizado"
-                        TextColor="Black" />
-                    <CollectionView HeightRequest="80" ItemsSource="{Binding Cebos}">
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <VerticalStackLayout Padding="5">
-                                    <Label
-                                        FontAttributes="Bold"
-                                        FontSize="14"
-                                        Text="{Binding TipoCebo}"
-                                        TextColor="Black" />
-                                    <Label
-                                        FontSize="12"
-                                        Text="{Binding Descripcion}"
-                                        TextColor="Black" />
-                                </VerticalStackLayout>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
-
-                    <Label
-                        FontAttributes="Bold"
-                        FontSize="16"
-                        Text="Método de pesca utilizado"
-                        TextColor="Black" />
-                    <CollectionView HeightRequest="80" ItemsSource="{Binding MetodosPescas}">
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <Label
-                                    FontSize="14"
-                                    Text="{Binding Metodo}"
-                                    TextColor="Black" />
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
-                </VerticalStackLayout>
-
-                <!--  Columna 3: Equipamiento + Clima  -->
-                <VerticalStackLayout
-                    Grid.Column="2"
-                    Margin="50,0,0,0"
-                    Spacing="10">
-                    <Label
-                        FontAttributes="Bold"
-                        FontSize="16"
-                        Text="Equipamiento"
-                        TextColor="Black" />
-                    <CollectionView HeightRequest="100" ItemsSource="{Binding Equipamientos}">
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <VerticalStackLayout Padding="5">
-                                    <Label
-                                        FontAttributes="Bold"
-                                        FontSize="14"
-                                        Text="{Binding TipoEquipo}"
-                                        TextColor="Black" />
-                                    <Label
-                                        FontSize="12"
-                                        Text="{Binding Marca}"
-                                        TextColor="Black" />
-                                    <Label
-                                        FontSize="12"
-                                        Text="{Binding Modelo}"
-                                        TextColor="Black" />
-                                </VerticalStackLayout>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
-
-                    <Label
-                        FontAttributes="Bold"
-                        FontSize="16"
-                        Text="Clima"
-                        TextColor="Black" />
-                    <CollectionView HeightRequest="80" ItemsSource="{Binding Climas}">
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <VerticalStackLayout Padding="5">
-                                    <Label
-                                        FontSize="12"
-                                        Text="{Binding Temperatura, StringFormat='Temperatura: {0}'}"
-                                        TextColor="Black" />
-                                    <Label
-                                        FontSize="12"
-                                        Text="{Binding Nubosidad, StringFormat='Nubosidad: {0}'}"
-                                        TextColor="Black" />
-                                    <Label
-                                        FontSize="12"
-                                        Text="{Binding Lluvia, StringFormat='Lluvia: {0}'}"
-                                        TextColor="Black" />
-                                </VerticalStackLayout>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
-                </VerticalStackLayout>
-            </Grid>
-
+                <!-- Botón cerrar -->
+                <Button
+                    Text="Cerrar"
+                    BackgroundColor="#2196F3"
+                    TextColor="White"
+                    CornerRadius="20"
+                    WidthRequest="150"
+                    Clicked="OnCerrarClicked" />
+            </VerticalStackLayout>
         </Frame>
-
-        <!--  Botón Cerrar  -->
-        <Button
-            Margin="0,10,0,10"
-            BackgroundColor="#2196F3"
-            Clicked="OnCerrarClicked"
-            CornerRadius="20"
-            FontAttributes="Bold"
-            HeightRequest="40"
-            HorizontalOptions="Center"
-            Text="Cerrar editar"
-            TextColor="White"
-            VerticalOptions="End"
-            WidthRequest="120" />
     </Grid>
 </mopups:PopupPage>

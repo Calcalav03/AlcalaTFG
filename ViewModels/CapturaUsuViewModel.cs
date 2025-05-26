@@ -26,6 +26,8 @@ namespace AlcalaTFG.ViewModels
         private int id;
         [ObservableProperty]
         private bool isLoading;
+        [ObservableProperty]
+        private CapturaInfo capturaSelected;
         public bool TieneCapturas => CapturasUsu != null && CapturasUsu.Count > 0;
 
         partial void OnCapturasUsuChanged(ObservableCollection<CapturaInfo> value)
@@ -43,12 +45,47 @@ namespace AlcalaTFG.ViewModels
         }
 
         [RelayCommand]
-        private async Task MostrarEditarBorrar(CapturaInfo captura)
+        private async Task MostrarEditarBorrar(CapturaInfo _captura)
         {
-            if (captura == null)
+            if (_captura == null)
                 return;
+            CapturaSelected = _captura;
+            var popup = new EditarBorrarMopup();
+            popup.BindingContext = this;
 
-            await MopupService.Instance.PushAsync(new EditarBorrarMopup(captura));
+            await MopupService.Instance.PushAsync(popup);
+        }
+
+        [RelayCommand]
+        public async void DeleteVaper()
+        {
+           
+            string ruta = "http://localhost:8089/jpa/capturas/Borrar/" + CapturaSelected.Id;
+
+            RequestModel requestModel = new RequestModel
+            {
+                Method = "DELETE",
+                Route = ruta,
+                Data = string.Empty
+            };
+
+
+            ResponseModel response = await APIService.ExecuteRequestJPA(requestModel);
+            await App.Current.MainPage.DisplayAlert("Mensaje", response.Message, "Aceptar");
+
+            if (response.Success.Equals(0))
+            {
+                try
+                {
+                    InitializeAsync();
+
+                }
+                catch (Exception ex) { }
+
+                await MopupService.Instance.PopAllAsync();
+
+
+            }
         }
 
         public CapturaUsuViewModel()

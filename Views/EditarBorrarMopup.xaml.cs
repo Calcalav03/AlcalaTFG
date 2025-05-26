@@ -6,10 +6,10 @@ namespace AlcalaTFG.Views;
 
 public partial class EditarBorrarMopup : PopupPage
 {
-	public EditarBorrarMopup(CapturaInfo captura)
+	public EditarBorrarMopup()
 	{
         InitializeComponent();
-        BindingContext = captura;
+        
     }
 
     private async void OnCerrarClicked(object sender, EventArgs e)
