@@ -3,12 +3,13 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:ffimage="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
-    xmlns:viewmodel="clr-namespace:AlcalaTFG.ViewModels"
-    xmlns:models="clr-namespace:AlcalaTFG.Models"
     xmlns:local="clr-namespace:AlcalaTFG.Converter"
+    xmlns:models="clr-namespace:AlcalaTFG.Models"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:viewmodel="clr-namespace:AlcalaTFG.ViewModels"
+    x:Name="capturaUsuPage"
     x:DataType="viewmodel:CapturaUsuViewModel"
-    BackgroundColor="Black"
-    >
+    BackgroundColor="Black">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -19,80 +20,108 @@
     </ContentPage.Resources>
 
     <Grid>
-        <ffimage:CachedImage 
-     Source="fondoglobal.gif"
-     Aspect="AspectFill"
-     DownsampleToViewSize="true"
-     HorizontalOptions="Fill"
-     VerticalOptions="Fill" />
-        <!-- Indicador de carga -->
-        <StackLayout IsVisible="{Binding IsLoading}" 
-                     BackgroundColor="#000000AA" 
-                     VerticalOptions="Center" 
-                     HorizontalOptions="Center"
-                     Padding="20"
-                     Spacing="10">
+        <ffimage:CachedImage
+            Aspect="AspectFill"
+            DownsampleToViewSize="true"
+            HorizontalOptions="Fill"
+            Source="pruebados.gif"
+            VerticalOptions="Fill" />
+        <!--  Indicador de carga  -->
+        <StackLayout
+            Padding="20"
+            BackgroundColor="#000000AA"
+            HorizontalOptions="Center"
+            IsVisible="{Binding IsLoading}"
+            Spacing="10"
+            VerticalOptions="Center">
             <ActivityIndicator IsRunning="True" Color="White" />
-            <Label Text="Cargando tus capturas..." TextColor="White" FontSize="16" HorizontalOptions="Center" />
+            <Label
+                FontSize="16"
+                HorizontalOptions="Center"
+                Text="Cargando tus capturas..."
+                TextColor="White" />
         </StackLayout>
 
-        <Label Text="No tienes capturas todavía."
-       TextColor="White"
-       FontSize="18"
-       HorizontalOptions="Center"
-       VerticalOptions="Center"
-       IsVisible="{Binding TieneCapturas, Converter={StaticResource InverseBoolConverter}}" />
+        <Label
+            FontSize="18"
+            HorizontalOptions="Center"
+            IsVisible="{Binding TieneCapturas, Converter={StaticResource InverseBoolConverter}}"
+            Text="No tienes capturas todavía."
+            TextColor="White"
+            VerticalOptions="Center" />
 
 
-        <!-- Capturas del usuario -->
-        <CollectionView ItemsSource="{Binding CapturasUsu}" Margin="10" SelectionMode="None" IsVisible="{Binding IsLoading, Converter={StaticResource InverseBoolConverter}}">
+        <!--  Capturas del usuario  -->
+        <CollectionView
+            Margin="10"
+            IsVisible="{Binding IsLoading, Converter={StaticResource InverseBoolConverter}}"
+            ItemsSource="{Binding CapturasUsu}"
+            SelectionMode="None">
             <CollectionView.ItemsLayout>
-                <GridItemsLayout Orientation="Vertical" Span="2" />
+                <GridItemsLayout
+                    HorizontalItemSpacing="5"
+                    Orientation="Vertical"
+                    Span="2"
+                    VerticalItemSpacing="5" />
             </CollectionView.ItemsLayout>
 
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:CapturaInfo">
-                    <Frame Margin="8"
-                           Padding="10"
-                           CornerRadius="16"
-                           BackgroundColor="#FFFFFFDD"
-                           HasShadow="True">
+                    <Frame
+                        Margin="8"
+                        Padding="10"
+                        BackgroundColor="#FFFFFFDD"
+                        CornerRadius="16"
+                        HasShadow="True">
+                        <Frame.Behaviors>
+                            <toolkit:TouchBehavior
+                                Command="{Binding Source={x:Reference capturaUsuPage}, Path=BindingContext.MostrarCapturaDetalleCommand}"
+                                CommandParameter="{Binding .}"
+                                LongPressCommand="{Binding Source={x:Reference capturaUsuPage}, Path=BindingContext.MostrarEditarBorrarCommand}"
+                                LongPressCommandParameter="{Binding .}" />
+                        </Frame.Behaviors>
+
                         <VerticalStackLayout Spacing="6">
-                            <ffimage:CachedImage 
-                                Source="{Binding ImagenUrl, Converter={StaticResource Base64ImageConverter}}"
-                                WidthRequest="160"
-                                HeightRequest="160"
+                            <ffimage:CachedImage
                                 Aspect="AspectFill"
-                                ErrorPlaceholder="defecto.png"
-                                LoadingPlaceholder="defecto.png"
+                                CacheType="All"
                                 DownsampleToViewSize="True"
-                                CacheType="All" />
+                                ErrorPlaceholder="defecto.png"
+                                HeightRequest="160"
+                                LoadingPlaceholder="defecto.png"
+                                Source="{Binding ImagenUrl, Converter={StaticResource Base64ImageConverter}}"
+                                WidthRequest="160" />
 
-                            <Label Text="{Binding Especie}" 
-                                   FontAttributes="Bold" 
-                                   FontSize="18"
-                                   TextColor="#222"
-                                   HorizontalTextAlignment="Center" />
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="18"
+                                HorizontalTextAlignment="Center"
+                                Text="{Binding Especie}"
+                                TextColor="#222" />
 
-                            <Label Text="{Binding Ubicacion}" 
-                                   FontSize="14" 
-                                   TextColor="#444"
-                                   HorizontalTextAlignment="Center" />
+                            <Label
+                                FontSize="14"
+                                HorizontalTextAlignment="Center"
+                                Text="{Binding Ubicacion}"
+                                TextColor="#444" />
 
-                            <Label Text="{Binding Fecha, StringFormat='Fecha: {0:dd/MM/yyyy}'}" 
-                                   FontSize="13" 
-                                   TextColor="#666"
-                                   HorizontalTextAlignment="Center" />
+                            <Label
+                                FontSize="13"
+                                HorizontalTextAlignment="Center"
+                                Text="{Binding Fecha, StringFormat='Fecha: {0:dd/MM/yyyy}'}"
+                                TextColor="#666" />
 
-                            <Label Text="{Binding Peso, StringFormat='Peso: {0} kg'}" 
-                                   FontSize="13" 
-                                   TextColor="#666"
-                                   HorizontalTextAlignment="Center" />
+                            <Label
+                                FontSize="13"
+                                HorizontalTextAlignment="Center"
+                                Text="{Binding Peso, StringFormat='Peso: {0} kg'}"
+                                TextColor="#666" />
 
-                            <Label Text="{Binding Tamano, StringFormat='Tamaño: {0} cm'}" 
-                                   FontSize="13" 
-                                   TextColor="#666"
-                                   HorizontalTextAlignment="Center" />
+                            <Label
+                                FontSize="13"
+                                HorizontalTextAlignment="Center"
+                                Text="{Binding Tamano, StringFormat='Tamaño: {0} cm'}"
+                                TextColor="#666" />
                         </VerticalStackLayout>
                     </Frame>
                 </DataTemplate>

@@ -53,5 +53,10 @@ namespace AlcalaTFG.ViewModels
             // Aquí navegas a otra vista (por ejemplo, a "NuevaVistaPage")
             await Shell.Current.GoToAsync("///CapturaUsuView");
         }
+        [RelayCommand]
+        private async void Apagar()
+        {
+            Application.Current.Quit();
+        }
     }
 }

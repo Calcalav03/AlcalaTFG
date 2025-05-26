@@ -2,8 +2,10 @@
 using AlcalaTFG.Models;
 using AlcalaTFG.services;
 using AlcalaTFG.Services;
+using AlcalaTFG.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Mopups.Services;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -31,6 +33,23 @@ namespace AlcalaTFG.ViewModels
             OnPropertyChanged(nameof(TieneCapturas));
         }
 
+        [RelayCommand]
+        private async Task MostrarCapturaDetalle(CapturaInfo captura)
+        {
+            if (captura == null)
+                return;
+
+            await MopupService.Instance.PushAsync(new CapturaDetalleMopup(captura));
+        }
+
+        [RelayCommand]
+        private async Task MostrarEditarBorrar(CapturaInfo captura)
+        {
+            if (captura == null)
+                return;
+
+            await MopupService.Instance.PushAsync(new EditarBorrarMopup(captura));
+        }
 
         public CapturaUsuViewModel()
         {

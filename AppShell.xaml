@@ -9,15 +9,15 @@
     Shell.FlyoutBehavior="Disabled">
 
     <TabBar>
-       
-        
-            <ShellContent ContentTemplate="{DataTemplate local:MainPage}" Route="Login" />
-        
 
-        <Tab Title="Menu Principal" Shell.TabBarTitleColor="Aqua" >
+
+        <ShellContent ContentTemplate="{DataTemplate local:MainPage}" Route="Login" />
+
+
+        <Tab Title="Menu Principal" Shell.TabBarTitleColor="Aqua">
             <ShellContent ContentTemplate="{DataTemplate views:MenuPrincipal}" Route="MenuPrincipal" />
         </Tab>
-        
+
         <Tab Title="Formulario Captura" Shell.TabBarTitleColor="Aqua">
             <ShellContent ContentTemplate="{DataTemplate views:FormularioCaptura}" Route="FormularioCaptura" />
         </Tab>

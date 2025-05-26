@@ -8,7 +8,8 @@
     x:Name="main"
     x:DataType="viewmodel:MainViewModel"
     BindingContext="{viewmodel:MainViewModel}"
-    Shell.TabBarIsVisible="False">
+    Shell.TabBarIsVisible="False"
+    BackgroundColor="Grey">
 
     <Frame
         Padding="20"
