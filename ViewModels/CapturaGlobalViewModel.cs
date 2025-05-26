@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -19,35 +20,56 @@ namespace AlcalaTFG.ViewModels
 
         [ObservableProperty]
         private ObservableCollection<CapturaInfo> capturas;
+        [ObservableProperty]
+        private bool isLoading;
+
+        public bool TieneCapturas => Capturas != null && Capturas.Count > 0;
+
+        partial void OnCapturasChanged(ObservableCollection<CapturaInfo> value)
+        {
+            OnPropertyChanged(nameof(TieneCapturas));
+        }
+
         public CapturaGlobalViewModel()
         {
             RequestCapturas();
         }
 
         [RelayCommand]
-        public async void RequestCapturas()
+        public async Task RequestCapturas()
         {
-            RequestModel requestModel = new RequestModel
+            IsLoading = true;
+
+            var requestModel = new RequestModel
             {
                 Method = "GET",
-                Route = "http://localhost:8089/jpa/capturas", // Ajusta la ruta si es necesario
+                Route = "http://localhost:8089/jpa/capturas",
                 Data = string.Empty
             };
 
-            ResponseModel response = await APIService.ExecuteRequestJPA(requestModel);
+            var response = await APIService.ExecuteRequestJPA(requestModel);
 
-            if (response.Success.Equals(0))
+            try
             {
-                try
+                if (response.Success == 0 && response.Data != null)
                 {
-                    Capturas = JsonConvert.DeserializeObject<ObservableCollection<CapturaInfo>>(response.Data.ToString());
+                    var capturas = JsonConvert.DeserializeObject<ObservableCollection<CapturaInfo>>(response.Data.ToString());
+                    Capturas = capturas ?? new ObservableCollection<CapturaInfo>();
                 }
-                catch (Exception ex)
+                else
                 {
-                    // Opcional: puedes registrar el error o mostrar un mensaje
+                    Capturas = new ObservableCollection<CapturaInfo>();
                 }
             }
+            catch (Exception ex)
+            {
+                Capturas = new ObservableCollection<CapturaInfo>();
+                Debug.WriteLine($"Error al deserializar capturas: {ex.Message}");
+            }
+
+            IsLoading = false;
         }
+
 
 
     }

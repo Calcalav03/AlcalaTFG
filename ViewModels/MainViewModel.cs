@@ -58,19 +58,19 @@ namespace AlcalaTFG.ViewModels
                 UserLogin = userlogin;
 
                 JwtPayload payload = JwtUtils.DecodeJwtPayload(token);
-                string rol = payload["rol"].ToString();
-                Debug.WriteLine("Payload: " + rol);
+                //string rol = payload["rol"].ToString();
+                //Debug.WriteLine("Payload: " + rol);
 
-                await App.Current.MainPage.DisplayAlert("ÉXITO", "Login correcto. El rol es: " + rol, "EMPEZAR");
+                //await App.Current.MainPage.DisplayAlert("ÉXITO", "Login correcto. El rol es: " + rol, "EMPEZAR");
 
-                if (rol.Equals("ADMIN"))
-                {
-                    await Shell.Current.GoToAsync("//MenuPrincipal");
-                }
-                else
-                {
-                    Application.Current.Quit();
-                }
+                //if (rol.Equals("ADMIN"))
+                //{
+                //    await Shell.Current.GoToAsync("//MenuPrincipal");
+                //}
+                //else
+                //{
+                //    Application.Current.Quit();
+                //}
             }
         }
 

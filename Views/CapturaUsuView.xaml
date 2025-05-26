@@ -1,0 +1,102 @@
+<ContentPage
+    x:Class="AlcalaTFG.Views.CapturaUsuView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ffimage="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
+    xmlns:viewmodel="clr-namespace:AlcalaTFG.ViewModels"
+    xmlns:models="clr-namespace:AlcalaTFG.Models"
+    xmlns:local="clr-namespace:AlcalaTFG.Converter"
+    x:DataType="viewmodel:CapturaUsuViewModel"
+    BackgroundColor="Black"
+    >
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:Base64ImageConverter x:Key="Base64ImageConverter" />
+            <local:InverseBoolConverter x:Key="InverseBoolConverter" />
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid>
+        <ffimage:CachedImage 
+     Source="fondoglobal.gif"
+     Aspect="AspectFill"
+     DownsampleToViewSize="true"
+     HorizontalOptions="Fill"
+     VerticalOptions="Fill" />
+        <!-- Indicador de carga -->
+        <StackLayout IsVisible="{Binding IsLoading}" 
+                     BackgroundColor="#000000AA" 
+                     VerticalOptions="Center" 
+                     HorizontalOptions="Center"
+                     Padding="20"
+                     Spacing="10">
+            <ActivityIndicator IsRunning="True" Color="White" />
+            <Label Text="Cargando tus capturas..." TextColor="White" FontSize="16" HorizontalOptions="Center" />
+        </StackLayout>
+
+        <Label Text="No tienes capturas todavía."
+       TextColor="White"
+       FontSize="18"
+       HorizontalOptions="Center"
+       VerticalOptions="Center"
+       IsVisible="{Binding TieneCapturas, Converter={StaticResource InverseBoolConverter}}" />
+
+
+        <!-- Capturas del usuario -->
+        <CollectionView ItemsSource="{Binding CapturasUsu}" Margin="10" SelectionMode="None" IsVisible="{Binding IsLoading, Converter={StaticResource InverseBoolConverter}}">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical" Span="2" />
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:CapturaInfo">
+                    <Frame Margin="8"
+                           Padding="10"
+                           CornerRadius="16"
+                           BackgroundColor="#FFFFFFDD"
+                           HasShadow="True">
+                        <VerticalStackLayout Spacing="6">
+                            <ffimage:CachedImage 
+                                Source="{Binding ImagenUrl, Converter={StaticResource Base64ImageConverter}}"
+                                WidthRequest="160"
+                                HeightRequest="160"
+                                Aspect="AspectFill"
+                                ErrorPlaceholder="defecto.png"
+                                LoadingPlaceholder="defecto.png"
+                                DownsampleToViewSize="True"
+                                CacheType="All" />
+
+                            <Label Text="{Binding Especie}" 
+                                   FontAttributes="Bold" 
+                                   FontSize="18"
+                                   TextColor="#222"
+                                   HorizontalTextAlignment="Center" />
+
+                            <Label Text="{Binding Ubicacion}" 
+                                   FontSize="14" 
+                                   TextColor="#444"
+                                   HorizontalTextAlignment="Center" />
+
+                            <Label Text="{Binding Fecha, StringFormat='Fecha: {0:dd/MM/yyyy}'}" 
+                                   FontSize="13" 
+                                   TextColor="#666"
+                                   HorizontalTextAlignment="Center" />
+
+                            <Label Text="{Binding Peso, StringFormat='Peso: {0} kg'}" 
+                                   FontSize="13" 
+                                   TextColor="#666"
+                                   HorizontalTextAlignment="Center" />
+
+                            <Label Text="{Binding Tamano, StringFormat='Tamaño: {0} cm'}" 
+                                   FontSize="13" 
+                                   TextColor="#666"
+                                   HorizontalTextAlignment="Center" />
+                        </VerticalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

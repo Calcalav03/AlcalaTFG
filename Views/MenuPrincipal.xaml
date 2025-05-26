@@ -8,7 +8,8 @@
     xmlns:viewmodel="clr-namespace:AlcalaTFG.ViewModels"
     x:DataType="viewmodel:MenuPrincipalViewModel"
     BackgroundColor="grey"
-    BindingContext="{viewmodel:MenuPrincipalViewModel}">
+    BindingContext="{viewmodel:MenuPrincipalViewModel}"
+    Shell.TabBarIsVisible="False">
     <Grid ColumnDefinitions="*" RowDefinitions="150,*">
         <Frame Margin="5" BackgroundColor="AliceBlue">
 
@@ -41,7 +42,7 @@
                     HeightRequest="120"
                     Source="mostrarusu.png"
                     WidthRequest="120"
-                    Command="{Binding CambiarVistaGVCommand}"/>
+                    Command="{Binding CambiarVistaCUCommand}"/>
                 <ImageButton
                     Grid.Row="1"
                     Grid.Column="5"

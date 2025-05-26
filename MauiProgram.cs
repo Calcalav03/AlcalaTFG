@@ -2,10 +2,13 @@
 using FFImageLoading.Maui;
 using Microsoft.Extensions.Logging;
 using Microsoft.Maui.LifecycleEvents;
+
+using Mopups.Hosting;
+#if WINDOWS
 using Microsoft.UI;
 using Microsoft.UI.Windowing;
-using Mopups.Hosting;
 using Windows.Graphics;
+#endif
 
 namespace AlcalaTFG
 {

@@ -10,11 +10,11 @@
 
     <TabBar>
        
-        <Tab Title="Login">
+        
             <ShellContent ContentTemplate="{DataTemplate local:MainPage}" Route="Login" />
-        </Tab>
+        
 
-        <Tab Title="Menu Principal" Shell.TabBarTitleColor="Aqua">
+        <Tab Title="Menu Principal" Shell.TabBarTitleColor="Aqua" >
             <ShellContent ContentTemplate="{DataTemplate views:MenuPrincipal}" Route="MenuPrincipal" />
         </Tab>
         
@@ -26,6 +26,9 @@
         </Tab>
         <Tab Title="Mostrar Todas Capturas" Shell.TabBarTitleColor="Aqua">
             <ShellContent ContentTemplate="{DataTemplate views:CapturaGlobalView}" Route="CapturaGlobalView" />
+        </Tab>
+        <Tab Title="Mostrar Capturas Usu" Shell.TabBarTitleColor="Aqua">
+            <ShellContent ContentTemplate="{DataTemplate views:CapturaUsuView}" Route="CapturaUsuView" />
         </Tab>
     </TabBar>
 
