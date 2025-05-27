@@ -57,6 +57,25 @@ namespace AlcalaTFG.ViewModels
         }
 
         [RelayCommand]
+        public async Task IrMopupEditar(CapturaInfo _captura)
+        {
+            if (_captura == null) return;
+
+            
+
+            var editarViewModel = new FormularioCapturaViewModel(_captura);
+
+            var editarPopup = new EditarCapturaMopup()
+            {
+                BindingContext = editarViewModel
+            };
+
+            await MopupService.Instance.PopAllAsync();
+
+            await MopupService.Instance.PushAsync(editarPopup);
+        }
+
+        [RelayCommand]
         public async void DeleteVaper()
         {
            

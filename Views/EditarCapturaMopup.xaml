@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage
-    x:Class="AlcalaTFG.Views.FormularioCaptura"
+<mopups:PopupPage
+    x:Class="AlcalaTFG.Views.EditarCapturaMopup"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:ffimage="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
-    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-    xmlns:viewmodel="clr-namespace:AlcalaTFG.ViewModels"
-    x:DataType="viewmodel:FormularioCapturaViewModel"
-    BackgroundColor="Grey"
-    BindingContext="{viewmodel:FormularioCapturaViewModel}">
+    xmlns:local="clr-namespace:AlcalaTFG.Converter"
+    xmlns:models="clr-namespace:AlcalaTFG.Models"
+    xmlns:mopups="clr-namespace:Mopups.Pages;"
+    Title="EditarCapturaMopup">
+
+    <mopups:PopupPage.Resources>
+        <ResourceDictionary>
+            <local:Base64ImageConverter x:Key="Base64ImageConverter" />
+        </ResourceDictionary>
+    </mopups:PopupPage.Resources>
+
     <Frame
         Padding="20"
         BackgroundColor="WhiteSmoke"
@@ -23,7 +28,7 @@
                     Radius="99" />
             </VerticalStackLayout.Shadow>
 
-
+            <!--  Título del formulario  -->
             <Label
                 Margin="10"
                 FontFamily="Nature"
@@ -41,11 +46,11 @@
                     HeightRequest="550"
                     HorizontalOptions="Start"
                     WidthRequest="300">
-
+                    <!--  Selector de imagen  -->
                     <ImageButton
                         Command="{Binding SeleccionarImagenCommand}"
                         HeightRequest="130"
-                        Source="{Binding ImagenUrl}"
+                        Source="{Binding ImagenUrl, Converter={StaticResource Base64ImageConverter}}"
                         WidthRequest="130" />
 
                     <Label
@@ -125,11 +130,12 @@
 
 
 
-
+                    
                 </VerticalStackLayout>
 
-
+               
                 <VerticalStackLayout>
+                   
                     <Label
                         Margin="50,20,0,0"
                         FontFamily="Nature"
@@ -149,7 +155,7 @@
                         TextColor="Gray"
                         WidthRequest="200" />
 
-                    <!--  Campo para la descripción  -->
+                    
                     <Label
                         Margin="50,10,0,0"
                         FontFamily="Nature"
@@ -235,7 +241,7 @@
 
 
                 <VerticalStackLayout>
-
+              
                     <Label
                         Margin="40,20,0,0"
                         FontFamily="Nature"
@@ -253,7 +259,7 @@
                         TextColor="Gray"
                         WidthRequest="120" />
 
-
+                    
                     <Label
                         Margin="40,30,0,0"
                         FontFamily="Nature"
@@ -306,4 +312,4 @@
             </HorizontalStackLayout>
         </VerticalStackLayout>
     </Frame>
-</ContentPage>
+</mopups:PopupPage>

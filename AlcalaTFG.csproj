@@ -84,6 +84,9 @@
 	  <MauiXaml Update="Views\EditarBorrarMopup.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\EditarCapturaMopup.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\FormularioCaptura.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

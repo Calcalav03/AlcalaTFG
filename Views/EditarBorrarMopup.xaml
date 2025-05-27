@@ -4,13 +4,12 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:AlcalaTFG.Converter"
-    xmlns:mopups="clr-namespace:Mopups.Pages;assembly=Mopups"
     xmlns:models="clr-namespace:AlcalaTFG.Models"
+    xmlns:mopups="clr-namespace:Mopups.Pages;assembly=Mopups"
     xmlns:viewmodel="clr-namespace:AlcalaTFG.ViewModels"
-    BackgroundColor="#80000000"
-    CloseWhenBackgroundIsClicked="True"
     x:DataType="viewmodel:CapturaUsuViewModel"
-    >
+    BackgroundColor="#80000000"
+    CloseWhenBackgroundIsClicked="True">
 
     <mopups:PopupPage.Resources>
         <ResourceDictionary>
@@ -24,62 +23,62 @@
             BackgroundColor="White"
             CornerRadius="20"
             HasShadow="True"
-            WidthRequest="300"
+            HorizontalOptions="Center"
             VerticalOptions="Center"
-            HorizontalOptions="Center">
+            WidthRequest="300">
 
-            <VerticalStackLayout Spacing="20" HorizontalOptions="Center">
-                <!-- Imagen -->
+            <VerticalStackLayout HorizontalOptions="Center" Spacing="20">
+                <!--  Imagen  -->
                 <Frame
                     Padding="0"
+                    BorderColor="#ccc"
                     CornerRadius="15"
-                    HeightRequest="150"
-                    WidthRequest="150"
                     HasShadow="True"
-                    BorderColor="#ccc">
+                    HeightRequest="150"
+                    WidthRequest="150">
                     <Image
                         Aspect="AspectFill"
-                        Source="{Binding CapturaSelected.ImagenUrl, Converter={StaticResource Base64ImageConverter}}"
                         HeightRequest="150"
-                        WidthRequest="150"
-                        />
+                        Source="{Binding CapturaSelected.ImagenUrl, Converter={StaticResource Base64ImageConverter}}"
+                        WidthRequest="150" />
                 </Frame>
 
-                <!-- Nombre -->
+                <!--  Nombre  -->
                 <Label
-                    Text="{Binding CapturaSelected.Especie}"
-                    FontSize="20"
                     FontAttributes="Bold"
-                    TextColor="Black"
-                    HorizontalTextAlignment="Center" />
+                    FontSize="20"
+                    HorizontalTextAlignment="Center"
+                    Text="{Binding CapturaSelected.Especie}"
+                    TextColor="Black" />
 
-                <!-- Botones Editar y Borrar -->
+                <!--  Botones Editar y Borrar  -->
                 <HorizontalStackLayout HorizontalOptions="Center" Spacing="15">
                     <Button
-                        Text="Editar"
                         BackgroundColor="#4CAF50"
-                        TextColor="White"
+                        Command="{Binding IrMopupEditarCommand}"
+                        CommandParameter="{Binding CapturaSelected}"
                         CornerRadius="15"
-                        WidthRequest="100"
-                         />
-                    <Button 
-                        Text="Borrar"
+                        Text="Editar"
+                        TextColor="White"
+                        WidthRequest="100" />
+
+                    <Button
                         BackgroundColor="#F44336"
-                        TextColor="White"
-                        CornerRadius="15"
-                        WidthRequest="100"
                         Command="{Binding DeleteVaperCommand}"
-                        />
+                        CornerRadius="15"
+                        Text="Borrar"
+                        TextColor="White"
+                        WidthRequest="100" />
                 </HorizontalStackLayout>
 
-                <!-- Botón cerrar -->
+                <!--  Botón cerrar  -->
                 <Button
-                    Text="Cerrar"
                     BackgroundColor="#2196F3"
-                    TextColor="White"
+                    Clicked="OnCerrarClicked"
                     CornerRadius="20"
-                    WidthRequest="150"
-                    Clicked="OnCerrarClicked" />
+                    Text="Cerrar"
+                    TextColor="White"
+                    WidthRequest="150" />
             </VerticalStackLayout>
         </Frame>
     </Grid>

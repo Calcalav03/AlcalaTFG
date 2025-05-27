@@ -61,11 +61,35 @@ namespace AlcalaTFG.ViewModels
         private string metodo;
         [ObservableProperty]
         private int id;
+        [ObservableProperty]
+        private CapturaInfo capturaSelected;
 
 
         public FormularioCapturaViewModel()
         {
             CargarDatos();
+        }
+        public FormularioCapturaViewModel(CapturaInfo capturainfo)
+        {
+            CargarDatos();
+            CapturaSelected = capturainfo;
+            
+            ImagenUrl = capturainfo.ImagenUrl;
+            //ImagenBytes = ConvertirImagenABase64(ImagenUrl);
+            Tamano = capturainfo.Tamano;
+            Peso = capturainfo.Peso;
+            Nombre = capturainfo.Especie;
+            Fecha = capturainfo.Fecha;
+            Ubicacion = capturainfo.Ubicacion;
+            Metodo = capturainfo.MetodosPescas?.FirstOrDefault()?.Metodo;
+            Temperatura = capturainfo.Climas?.FirstOrDefault()?.Temperatura;
+            Clima = capturainfo.Climas?.FirstOrDefault()?.Nubosidad;
+            Lloviendo = capturainfo.Climas?.FirstOrDefault()?.Lluvia ?? false;
+            Cebo = new CeboInfo(capturainfo.Cebos.FirstOrDefault().Id,capturainfo.Cebos?.FirstOrDefault()?.TipoCebo,
+            capturainfo.Cebos?.FirstOrDefault()?.Descripcion);
+
+
+
         }
         [RelayCommand]
         public void CargarDatos()

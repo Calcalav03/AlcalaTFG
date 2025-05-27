@@ -9,6 +9,8 @@ namespace AlcalaTFG.Models
 {
     public class CeboInfo
     {
+       
+
         [JsonProperty("id")]
         public int Id { get; set; }
 
@@ -17,6 +19,15 @@ namespace AlcalaTFG.Models
 
         [JsonProperty("tipoCebo")]
         public string TipoCebo { get; set; }
+
+      
+
+        public CeboInfo(int id, string? tipoCebo, string? descripcion)
+        {
+            this.Id = id;
+            TipoCebo = tipoCebo;
+            Descripcion = descripcion;
+        }
     }
 
 }
