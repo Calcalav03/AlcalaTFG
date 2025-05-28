@@ -6,6 +6,7 @@
     xmlns:local="clr-namespace:AlcalaTFG.Converter"
     xmlns:models="clr-namespace:AlcalaTFG.Models"
     xmlns:mopups="clr-namespace:Mopups.Pages;"
+    
     Title="EditarCapturaMopup">
 
     <mopups:PopupPage.Resources>

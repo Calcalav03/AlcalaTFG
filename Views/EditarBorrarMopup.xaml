@@ -64,7 +64,7 @@
 
                     <Button
                         BackgroundColor="#F44336"
-                        Command="{Binding DeleteVaperCommand}"
+                        Command="{Binding DeleteCapturaCommand}"
                         CornerRadius="15"
                         Text="Borrar"
                         TextColor="White"

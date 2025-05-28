@@ -97,5 +97,7 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
-
+	<ItemGroup>
+		<MauiAsset Include="Resources/Raw/imagen.png" />
+	</ItemGroup>
 </Project>

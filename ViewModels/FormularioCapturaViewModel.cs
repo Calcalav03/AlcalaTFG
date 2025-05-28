@@ -6,6 +6,8 @@ using AlcalaTFG.Utils;
 
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Maui.Storage;
+using Mopups.Services;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -19,14 +21,14 @@ using System.Threading.Tasks;
 
 namespace AlcalaTFG.ViewModels
 {
-    public partial class FormularioCapturaViewModel:ObservableObject    
+    public partial class FormularioCapturaViewModel : ObservableObject
     {
         [ObservableProperty]
-        private string imagenUrl="defecto.png";
+        private string imagenUrl = "defecto.png";
         // Ruta de imagen por defecto
         private const string ImagenPorDefecto = "resource://AlcalaTFG.Resources.Images.defecto.png";
 
-       
+
 
 
         [ObservableProperty]
@@ -44,15 +46,17 @@ namespace AlcalaTFG.ViewModels
         [ObservableProperty]
         private string ubicacion;
         [ObservableProperty]
-        private DateTime fecha=DateTime.Today;
+        private DateTime fecha = DateTime.Today;
         [ObservableProperty]
         private string clima;
         [ObservableProperty]
         private ObservableCollection<EquipamientoInfo> equipamientos;
         [ObservableProperty]
         private EquipamientoInfo equipamiento;
+
         [ObservableProperty]
         private ObservableCollection<CeboInfo> cebos;
+
         [ObservableProperty]
         private CeboInfo cebo;
         [ObservableProperty]
@@ -64,16 +68,20 @@ namespace AlcalaTFG.ViewModels
         [ObservableProperty]
         private CapturaInfo capturaSelected;
 
+        CapturaUsuViewModel capturaUsuViewModel;
+
 
         public FormularioCapturaViewModel()
         {
             CargarDatos();
         }
-        public FormularioCapturaViewModel(CapturaInfo capturainfo)
+        public FormularioCapturaViewModel(CapturaInfo capturainfo, CapturaUsuViewModel capturaUsuVM)
         {
+            capturaUsuViewModel = capturaUsuVM;
+           
             CargarDatos();
             CapturaSelected = capturainfo;
-            
+
             ImagenUrl = capturainfo.ImagenUrl;
             //ImagenBytes = ConvertirImagenABase64(ImagenUrl);
             Tamano = capturainfo.Tamano;
@@ -85,9 +93,6 @@ namespace AlcalaTFG.ViewModels
             Temperatura = capturainfo.Climas?.FirstOrDefault()?.Temperatura;
             Clima = capturainfo.Climas?.FirstOrDefault()?.Nubosidad;
             Lloviendo = capturainfo.Climas?.FirstOrDefault()?.Lluvia ?? false;
-            Cebo = new CeboInfo(capturainfo.Cebos.FirstOrDefault().Id,capturainfo.Cebos?.FirstOrDefault()?.TipoCebo,
-            capturainfo.Cebos?.FirstOrDefault()?.Descripcion);
-
 
 
         }
@@ -118,6 +123,15 @@ namespace AlcalaTFG.ViewModels
                 try
                 {
                     Cebos = JsonConvert.DeserializeObject<ObservableCollection<CeboInfo>>(response.Data.ToString());
+                    try
+                    {
+                       if(CapturaSelected != null)
+                        Cebo = Cebos.Where(c => c.Id == CapturaSelected.Cebos.FirstOrDefault().Id).FirstOrDefault();
+                        
+
+                    }
+                    catch (Exception ex) { }
+
                 }
                 catch (Exception ex) { }
             }
@@ -178,6 +192,12 @@ namespace AlcalaTFG.ViewModels
                 try
                 {
                     Equipamientos = JsonConvert.DeserializeObject<ObservableCollection<EquipamientoInfo>>(response.Data.ToString());
+                    try
+                    {
+                        if (CapturaSelected != null)
+                            Equipamiento = Equipamientos.Where(e => e.Id == CapturaSelected.Equipamientos.FirstOrDefault().Id).FirstOrDefault();
+                    }
+                    catch (Exception ex) { }
                 }
                 catch (Exception ex) { }
             }
@@ -188,7 +208,7 @@ namespace AlcalaTFG.ViewModels
         {
             string message = "Ocurrió un error al crear la captura: ";
             string bien = "captura creada correctamente!";
-            
+
 
             try
             {
@@ -210,9 +230,10 @@ namespace AlcalaTFG.ViewModels
 
                 if (Fecha == default)
                     errores.Add("La fecha es obligatoria.");
-
-                if (imagenBytes == null || imagenBytes.Length == 0)
-                    errores.Add("La imagen es obligatoria.");
+                
+                 if (imagenBytes == null || imagenBytes.Length == 0)
+                        errores.Add("La imagen es obligatoria.");
+                
 
                 if (Temperatura == null)
                     errores.Add("La temperatura es obligatoria.");
@@ -229,32 +250,56 @@ namespace AlcalaTFG.ViewModels
                     await App.Current.MainPage.DisplayAlert("Error", string.Join("\n", errores), "Aceptar");
                     return;
                 }
-
-                // Si no hay errores, creamos el objeto
-                var capturaDto = new CapturaDTO(
-                    usuario: new CapturaDTO.UsuarioDto(Id), // Aquí creamos un nuevo objeto UsuarioDto directamente en el constructor
-                    especie: Nombre,
-                    peso: Peso,
-                    tamano: Tamano,
-                    ubicacion: Ubicacion,
-                    fecha: Fecha.ToUniversalTime().AddDays(1),
-                    imagenUrl: Convert.ToBase64String(imagenBytes),
-                    cebos: new HashSet<CapturaDTO.CeboDto1> { new CapturaDTO.CeboDto1(Cebo.Id) }, // Nuevos objetos de CeboDto1
-                    equipamientos: new HashSet<CapturaDTO.EquipamientoDto1> { new CapturaDTO.EquipamientoDto1(Equipamiento.Id) }, // Nuevos objetos de EquipamientoDto1
-                    climas: new HashSet<CapturaDTO.ClimaDto>
-                    {
+                CapturaDTO capturaDto;
+                if (CapturaSelected != null)
+                {
+                    capturaDto = new CapturaDTO(
+                        usuario: new CapturaDTO.UsuarioDto(Id), // Aquí creamos un nuevo objeto UsuarioDto directamente en el constructor
+                        especie: Nombre,
+                        peso: Peso,
+                        tamano: Tamano,
+                        ubicacion: Ubicacion,
+                        fecha: Fecha.ToUniversalTime().AddDays(1),
+                        imagenUrl: Convert.ToBase64String(imagenBytes),
+                        cebos: new HashSet<CapturaDTO.CeboDto1> { new CapturaDTO.CeboDto1(Cebo.Id) }, // Nuevos objetos de CeboDto1
+                        equipamientos: new HashSet<CapturaDTO.EquipamientoDto1> { new CapturaDTO.EquipamientoDto1(Equipamiento.Id) }, // Nuevos objetos de EquipamientoDto1
+                        climas: new HashSet<CapturaDTO.ClimaDto>
+                        {
                         new CapturaDTO.ClimaDto(Temperatura, Clima, Lloviendo) // Nuevo objeto de ClimaDto
-                    },
-                    metodosPescas: new HashSet<CapturaDTO.MetodosPescaDto> { new CapturaDTO.MetodosPescaDto(Metodo) } // Nuevo objeto de MetodosPescaDto
-                );
+                        },
+                        metodosPescas: new HashSet<CapturaDTO.MetodosPescaDto> { new CapturaDTO.MetodosPescaDto(Metodo) } // Nuevo objeto de MetodosPescaDto
+                    )
+                    {
+                        Id = CapturaSelected.Id
+                    };
+
+
+                }
+                else
+                {
+                    // Si no hay errores, creamos el objeto
+                    capturaDto = new CapturaDTO(
+                        usuario: new CapturaDTO.UsuarioDto(Id), // Aquí creamos un nuevo objeto UsuarioDto directamente en el constructor
+                        especie: Nombre,
+                        peso: Peso,
+                        tamano: Tamano,
+                        ubicacion: Ubicacion,
+                        fecha: Fecha.ToUniversalTime().AddDays(1),
+                        imagenUrl: Convert.ToBase64String(imagenBytes),
+                        cebos: new HashSet<CapturaDTO.CeboDto1> { new CapturaDTO.CeboDto1(Cebo.Id) }, // Nuevos objetos de CeboDto1
+                        equipamientos: new HashSet<CapturaDTO.EquipamientoDto1> { new CapturaDTO.EquipamientoDto1(Equipamiento.Id) }, // Nuevos objetos de EquipamientoDto1
+                        climas: new HashSet<CapturaDTO.ClimaDto>
+                        {
+                        new CapturaDTO.ClimaDto(Temperatura, Clima, Lloviendo) // Nuevo objeto de ClimaDto
+                        },
+                        metodosPescas: new HashSet<CapturaDTO.MetodosPescaDto> { new CapturaDTO.MetodosPescaDto(Metodo) } // Nuevo objeto de MetodosPescaDto
+                    );
+                }
 
                 // Aquí puedes continuar con el proceso de guardado o cualquier otra lógica que necesites.
-            
-           
 
-
-            // Crear el RequestModel
-            var request = new RequestModel
+                // Crear el RequestModel
+                var request = new RequestModel
                 {
                     Data = capturaDto,
                     Method = "POST",
@@ -270,6 +315,12 @@ namespace AlcalaTFG.ViewModels
 
 
                 LimpiarFormulario();
+
+                if (capturaSelected != null) {
+                    
+                    await capturaUsuViewModel.InitializeAsync();
+                    await MopupService.Instance.PopAllAsync();
+                }
 
 
             }
@@ -288,6 +339,11 @@ namespace AlcalaTFG.ViewModels
             {
                 ImagenUrl = file.FullPath;
                 ImagenBytes = await ConvertirImagenABase64(ImagenUrl);
+                if (CapturaSelected != null)
+                {
+                    ImagenUrl = Convert.ToBase64String(ImagenBytes);
+                    
+                }
             }
             else
             {
@@ -318,22 +374,30 @@ namespace AlcalaTFG.ViewModels
         }
 
         [RelayCommand]
-        public void LimpiarFormulario()
+        public async Task LimpiarFormulario()
         {
             Peso = 0;
             Tamano = 0;
             //Modelo = string.Empty;
             Fecha = DateTime.Today;
             Temperatura = null;
-            Nombre=string.Empty;
-            Ubicacion= string.Empty;
-            Clima=null;
-            Equipamiento=null;
-            Cebo=null;
-            Lloviendo=false;
-            Metodo= string.Empty;
+            Nombre = string.Empty;
+            Ubicacion = string.Empty;
+            Clima = null;
+            Equipamiento = null;
+            Cebo = null;
+            Lloviendo = false;
+            Metodo = string.Empty;
             ImagenUrl = "defecto.png";
             ImagenBytes = null;
+            if (CapturaSelected != null)
+            {
+                using Stream stream = await FileSystem.OpenAppPackageFileAsync("imagen.png");
+                using var ms = new MemoryStream();
+                stream.CopyTo(ms);
+
+                ImagenUrl = Convert.ToBase64String(ms.ToArray());
+            }
 
         }
     }

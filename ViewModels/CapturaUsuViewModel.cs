@@ -63,7 +63,7 @@ namespace AlcalaTFG.ViewModels
 
             
 
-            var editarViewModel = new FormularioCapturaViewModel(_captura);
+            var editarViewModel = new FormularioCapturaViewModel(_captura, this);
 
             var editarPopup = new EditarCapturaMopup()
             {
@@ -76,7 +76,7 @@ namespace AlcalaTFG.ViewModels
         }
 
         [RelayCommand]
-        public async void DeleteVaper()
+        public async void DeleteCaptura()
         {
            
             string ruta = "http://localhost:8089/jpa/capturas/Borrar/" + CapturaSelected.Id;

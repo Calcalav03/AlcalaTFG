@@ -9,6 +9,8 @@
     x:DataType="viewmodel:FormularioCapturaViewModel"
     BackgroundColor="Grey"
     BindingContext="{viewmodel:FormularioCapturaViewModel}">
+    <Grid
+        >
     <Frame
         Padding="20"
         BackgroundColor="WhiteSmoke"
@@ -306,4 +308,13 @@
             </HorizontalStackLayout>
         </VerticalStackLayout>
     </Frame>
+        <ImageButton HorizontalOptions="End"
+                Margin="20"
+                WidthRequest="100"
+                HeightRequest="100"
+                  
+                Source="home.png"
+                ZIndex="100"
+                VerticalOptions="End"/>
+    </Grid>
 </ContentPage>

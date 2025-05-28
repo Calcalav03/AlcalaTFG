@@ -15,8 +15,8 @@ namespace AlcalaTFG.Models
         private ClimaDto climas;
         private MetodosPescaDto metodosPescas;
 
-        //[JsonProperty("id")]
-        //public int Id { get; set; }
+        [JsonProperty("id")]
+        public int? Id { get; set; }
 
         [JsonProperty("usuario")]
         public UsuarioDto Usuario { get; set; }
@@ -53,7 +53,6 @@ namespace AlcalaTFG.Models
 
         public CapturaDTO( UsuarioDto usuario, string especie, decimal peso, decimal tamano, string ubicacion, DateTime fecha, string imagenUrl, HashSet<CeboDto1> cebos, HashSet<EquipamientoDto1> equipamientos, HashSet<ClimaDto> climas, HashSet<MetodosPescaDto> metodosPescas)
         {
-           
             Usuario = usuario;
             Especie = especie;
             Peso = peso;

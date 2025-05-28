@@ -28,6 +28,8 @@ namespace AlcalaTFG.Models
             TipoCebo = tipoCebo;
             Descripcion = descripcion;
         }
+
+        public CeboInfo() { }
     }
 
 }
