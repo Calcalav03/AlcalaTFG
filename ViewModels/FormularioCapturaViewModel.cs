@@ -78,12 +78,12 @@ namespace AlcalaTFG.ViewModels
         public FormularioCapturaViewModel(CapturaInfo capturainfo, CapturaUsuViewModel capturaUsuVM)
         {
             capturaUsuViewModel = capturaUsuVM;
-           
+
             CargarDatos();
             CapturaSelected = capturainfo;
 
             ImagenUrl = capturainfo.ImagenUrl;
-           // ImagenBytes = ConvertirImagenABase64(ImagenUrl);
+            // ImagenBytes = ConvertirImagenABase64(ImagenUrl);
             Tamano = capturainfo.Tamano;
             Peso = capturainfo.Peso;
             Nombre = capturainfo.Especie;
@@ -106,7 +106,8 @@ namespace AlcalaTFG.ViewModels
         }
 
         [RelayCommand]
-        public async Task AMenu() {
+        public async Task AMenu()
+        {
             await Shell.Current.GoToAsync("//MenuPrincipal");
         }
 
@@ -131,9 +132,9 @@ namespace AlcalaTFG.ViewModels
                     Cebos = JsonConvert.DeserializeObject<ObservableCollection<CeboInfo>>(response.Data.ToString());
                     try
                     {
-                       if(CapturaSelected != null)
-                        Cebo = Cebos.Where(c => c.Id == CapturaSelected.Cebos.FirstOrDefault().Id).FirstOrDefault();
-                        
+                        if (CapturaSelected != null)
+                            Cebo = Cebos.Where(c => c.Id == CapturaSelected.Cebos.FirstOrDefault().Id).FirstOrDefault();
+
 
                     }
                     catch (Exception ex) { }
@@ -237,14 +238,14 @@ namespace AlcalaTFG.ViewModels
                 if (Fecha == default)
                     errores.Add("La fecha es obligatoria.");
 
-               // if (CapturaSelected == null)
-               // {
+                if (CapturaSelected == null)
+                {
                     if (ImagenBytes == null || ImagenBytes.Length == 0)
                     {
                         errores.Add("La imagen es obligatoria.");
                     }
-                //}
-               
+                }
+
 
                 if (Temperatura == null)
                     errores.Add("La temperatura es obligatoria.");
@@ -264,8 +265,6 @@ namespace AlcalaTFG.ViewModels
                 CapturaDTO capturaDto;
                 if (CapturaSelected != null)
                 {
-                   
-
                     capturaDto = new CapturaDTO(
                         usuario: new CapturaDTO.UsuarioDto(Id), // Aquí creamos un nuevo objeto UsuarioDto directamente en el constructor
                         especie: Nombre,
@@ -273,7 +272,7 @@ namespace AlcalaTFG.ViewModels
                         tamano: Tamano,
                         ubicacion: Ubicacion,
                         fecha: Fecha.ToUniversalTime().AddDays(1),
-                        imagenUrl: Convert.ToBase64String(imagenBytes),
+                        imagenUrl: ImagenUrl, // Asignar la imagen existente si no se proporciona una nueva
                         cebos: new HashSet<CapturaDTO.CeboDto1> { new CapturaDTO.CeboDto1(Cebo.Id) }, // Nuevos objetos de CeboDto1
                         equipamientos: new HashSet<CapturaDTO.EquipamientoDto1> { new CapturaDTO.EquipamientoDto1(Equipamiento.Id) }, // Nuevos objetos de EquipamientoDto1
                         climas: new HashSet<CapturaDTO.ClimaDto>
@@ -282,13 +281,11 @@ namespace AlcalaTFG.ViewModels
                         },
                         metodosPescas: new HashSet<CapturaDTO.MetodosPescaDto> { new CapturaDTO.MetodosPescaDto(Metodo) } // Nuevo objeto de MetodosPescaDto
                     )
-                     
+
                     {
                         Id = CapturaSelected.Id
-                         
-                    };
-                    
 
+                    };
 
                 }
                 else
@@ -332,8 +329,9 @@ namespace AlcalaTFG.ViewModels
 
                 LimpiarFormulario();
 
-                if (capturaSelected != null) {
-                    
+                if (capturaSelected != null)
+                {
+
                     await capturaUsuViewModel.InitializeAsync();
                     await MopupService.Instance.PopAllAsync();
                 }
@@ -358,7 +356,7 @@ namespace AlcalaTFG.ViewModels
                 if (CapturaSelected != null)
                 {
                     ImagenUrl = Convert.ToBase64String(ImagenBytes);
-                    
+
                 }
             }
             else
@@ -389,7 +387,7 @@ namespace AlcalaTFG.ViewModels
             }
         }
 
-        
+
 
         [RelayCommand]
         public async Task LimpiarFormulario()

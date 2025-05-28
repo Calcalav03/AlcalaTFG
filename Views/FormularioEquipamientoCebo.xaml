@@ -176,6 +176,7 @@
     Source="home.png"
     VerticalOptions="End"
     WidthRequest="100"
+            Background="Transparent"
     ZIndex="100" />
 
     </Grid>

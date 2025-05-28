@@ -154,6 +154,7 @@
             HorizontalOptions="End"
             Source="home.png"
             VerticalOptions="End"
+            Background="Transparent"
             WidthRequest="100"
             ZIndex="100" />
     </Grid>
