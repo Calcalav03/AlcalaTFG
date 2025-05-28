@@ -37,7 +37,7 @@ namespace AlcalaTFG.Models
         public DateTimeOffset Fecha { get; set; } = DateTimeOffset.UtcNow;
 
         [JsonProperty("imagenUrl")]
-        public string ImagenUrl { get; set; }
+        public string? ImagenUrl { get; set; }
 
         [JsonProperty("cebos")]
         public HashSet<CeboDto1> Cebos { get; set; }
@@ -65,6 +65,20 @@ namespace AlcalaTFG.Models
             Climas = climas;
             MetodosPescas = metodosPescas;
         }
+        //public CapturaDTO(UsuarioDto usuario, string especie, decimal peso, decimal tamano, string ubicacion, DateTime fecha, HashSet<CeboDto1> cebos, HashSet<EquipamientoDto1> equipamientos, HashSet<ClimaDto> climas, HashSet<MetodosPescaDto> metodosPescas)
+        //{
+        //    Usuario = usuario;
+        //    Especie = especie;
+        //    Peso = peso;
+        //    Tamano = tamano;
+        //    Ubicacion = ubicacion;
+        //    Fecha = fecha;
+            
+        //    Cebos = cebos;
+        //    Equipamientos = equipamientos;
+        //    Climas = climas;
+        //    MetodosPescas = metodosPescas;
+        //}
 
         public CapturaDTO(UsuarioDto usuario, string especie, int peso, int tamano, string ubicacion, DateTime fecha, string imagenUrl, CeboDto1 cebos, EquipamientoDto1 equipamientos, ClimaDto climas, MetodosPescaDto metodosPescas)
         {

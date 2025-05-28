@@ -8,26 +8,27 @@
     xmlns:viewmodel="clr-namespace:AlcalaTFG.ViewModels"
     x:DataType="viewmodel:FormularioEquipamientoCeboViewModel"
     BackgroundColor="Grey"
-    BindingContext="{viewmodel:FormularioEquipamientoCeboViewModel}">
-
-    <Frame
+    BindingContext="{viewmodel:FormularioEquipamientoCeboViewModel}"
+     Shell.TabBarIsVisible="False">
+    <Grid>
+        <Frame
         Padding="20"
         BackgroundColor="WhiteSmoke"
         CornerRadius="15"
         HeightRequest="550"
         WidthRequest="850">
 
-        <VerticalStackLayout HeightRequest="500" WidthRequest="800">
+            <VerticalStackLayout HeightRequest="500" WidthRequest="800">
 
-            <VerticalStackLayout.Shadow>
-                <Shadow
+                <VerticalStackLayout.Shadow>
+                    <Shadow
                     Brush="Gray"
                     Opacity=".4"
                     Radius="99" />
-            </VerticalStackLayout.Shadow>
+                </VerticalStackLayout.Shadow>
 
-            <!--  Título  -->
-            <Label
+                <!--  Título  -->
+                <Label
                 Margin="10"
                 FontFamily="Nature"
                 FontSize="35"
@@ -35,112 +36,112 @@
                 Text="Tu equipo de pesca en acción 🧰🪝🎒"
                 TextColor="Black" />
 
-            <HorizontalStackLayout
+                <HorizontalStackLayout
                 Margin="0,30,0,0"
                 HeightRequest="400"
                 Spacing="30">
 
-                <!--  Formulario de Equipamiento  -->
-                <VerticalStackLayout
+                    <!--  Formulario de Equipamiento  -->
+                    <VerticalStackLayout
                     Margin="20,0,0,0"
                     HorizontalOptions="Center"
                     WidthRequest="350">
 
-                    <Label
+                        <Label
                         FontFamily="Nature"
                         FontSize="20"
                         HorizontalOptions="Center"
                         Text="Equipamiento"
                         TextColor="Black" />
 
-                    <Label
+                        <Label
                         Margin="0,20,0,0"
                         FontFamily="Nature"
                         FontSize="15"
                         Text="Tipo de equipo:"
                         TextColor="Black" />
-                    <Entry
+                        <Entry
                         BackgroundColor="LightGray"
                         FontFamily="Comic Sans MS"
                         Placeholder="Ej: caña, carrete..."
                         Text="{Binding TipoEquip}"
                         TextColor="Gray" />
 
-                    <Label
+                        <Label
                         Margin="0,20,0,0"
                         FontFamily="Nature"
                         FontSize="15"
                         Text="Marca:"
                         TextColor="Black" />
-                    <Entry
+                        <Entry
                         BackgroundColor="LightGray"
                         FontFamily="Comic Sans MS"
                         Placeholder="Marca del equipo"
                         Text="{Binding Marca}"
                         TextColor="Gray" />
 
-                    <Label
+                        <Label
                         Margin="0,20,0,0"
                         FontFamily="Nature"
                         FontSize="15"
                         Text="Modelo:"
                         TextColor="Black" />
-                    <Entry
+                        <Entry
                         BackgroundColor="LightGray"
                         FontFamily="Comic Sans MS"
                         Placeholder="Modelo del equipo"
                         Text="{Binding Modelo}"
                         TextColor="Gray" />
 
-                    <HorizontalStackLayout Margin="0,20,0,0" Spacing="10">
-                        <Button
+                        <HorizontalStackLayout Margin="0,20,0,0" Spacing="10">
+                            <Button
                             BackgroundColor="LightGreen"
                             Command="{Binding CrearEquipamientoCommand}"
                             FontFamily="Nature"
                             Text="Crear"
                             WidthRequest="120" />
-                        <Button
+                            <Button
                             BackgroundColor="LightCoral"
                             Command="{Binding LimpiarFormularioCeboCommand}"
                             FontFamily="Nature"
                             Text="Limpiar"
                             WidthRequest="120" />
-                    </HorizontalStackLayout>
-                </VerticalStackLayout>
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
 
-                <!--  Formulario de Cebo  -->
-                <VerticalStackLayout
+                    <!--  Formulario de Cebo  -->
+                    <VerticalStackLayout
                     Margin="0,0,20,0"
                     HorizontalOptions="Center"
                     WidthRequest="350">
 
-                    <Label
+                        <Label
                         FontFamily="Nature"
                         FontSize="20"
                         HorizontalOptions="Center"
                         Text="Cebo"
                         TextColor="Black" />
 
-                    <Label
+                        <Label
                         Margin="0,20,0,0"
                         FontFamily="Nature"
                         FontSize="15"
                         Text="Tipo de cebo:"
                         TextColor="Black" />
-                    <Entry
+                        <Entry
                         BackgroundColor="LightGray"
                         FontFamily="Comic Sans MS"
                         Placeholder="Ej: maíz, boilies..."
                         Text="{Binding TipoCebo}"
                         TextColor="Gray" />
 
-                    <Label
+                        <Label
                         Margin="0,20,0,0"
                         FontFamily="Nature"
                         FontSize="15"
                         Text="Descripción:"
                         TextColor="Black" />
-                    <Editor
+                        <Editor
                         BackgroundColor="LightGray"
                         FontFamily="Comic Sans MS"
                         HeightRequest="60"
@@ -148,23 +149,36 @@
                         Text="{Binding Descripcion}"
                         TextColor="Gray" />
 
-                    <HorizontalStackLayout Margin="0,20,0,0" Spacing="10">
-                        <Button
+                        <HorizontalStackLayout Margin="0,20,0,0" Spacing="10">
+                            <Button
                             BackgroundColor="LightGreen"
                             Command="{Binding CrearCeboCommand}"
                             FontFamily="Nature"
                             Text="Crear"
                             WidthRequest="120" />
-                        <Button
+                            <Button
                             BackgroundColor="LightCoral"
                             Command="{Binding LimpiarFormularioCeboCommand}"
                             FontFamily="Nature"
                             Text="Limpiar"
                             WidthRequest="120" />
-                    </HorizontalStackLayout>
-                </VerticalStackLayout>
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
 
-            </HorizontalStackLayout>
-        </VerticalStackLayout>
-    </Frame>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+        </Frame>
+        <ImageButton
+    Margin="20"
+    Command="{Binding AMenuCommand}"
+    HeightRequest="100"
+    HorizontalOptions="End"
+    Source="home.png"
+    VerticalOptions="End"
+    WidthRequest="100"
+    ZIndex="100" />
+
+    </Grid>
 </ContentPage>
+
+    

@@ -8,313 +8,314 @@
     xmlns:viewmodel="clr-namespace:AlcalaTFG.ViewModels"
     x:DataType="viewmodel:FormularioCapturaViewModel"
     BackgroundColor="Grey"
-    BindingContext="{viewmodel:FormularioCapturaViewModel}">
-    <Grid
-        >
-    <Frame
-        Padding="20"
-        BackgroundColor="WhiteSmoke"
-        CornerRadius="15"
-        HeightRequest="550"
-        WidthRequest="850">
-        <VerticalStackLayout HeightRequest="500" WidthRequest="800">
-            <VerticalStackLayout.Shadow>
-                <Shadow
-                    Brush="Gray"
-                    Opacity=".4"
-                    Radius="99" />
-            </VerticalStackLayout.Shadow>
+    BindingContext="{viewmodel:FormularioCapturaViewModel}"
+     Shell.TabBarIsVisible="False">
+    <Grid>
+        <Frame
+            Padding="20"
+            BackgroundColor="WhiteSmoke"
+            CornerRadius="15"
+            HeightRequest="550"
+            WidthRequest="850">
+            <VerticalStackLayout HeightRequest="500" WidthRequest="800">
+                <VerticalStackLayout.Shadow>
+                    <Shadow
+                        Brush="Gray"
+                        Opacity=".4"
+                        Radius="99" />
+                </VerticalStackLayout.Shadow>
 
 
-            <Label
-                Margin="10"
-                FontFamily="Nature"
-                FontSize="35"
-                HorizontalOptions="Center"
-                Text="¿Qué atrapaste hoy? 🐟🎣📝"
-                TextColor="Black" />
+                <Label
+                    Margin="10"
+                    FontFamily="Nature"
+                    FontSize="35"
+                    HorizontalOptions="Center"
+                    Text="¿Qué atrapaste hoy? 🐟🎣📝"
+                    TextColor="Black" />
 
-            <HorizontalStackLayout>
+                <HorizontalStackLayout>
 
 
 
-                <VerticalStackLayout
-                    Margin="20,0,0,0"
-                    HeightRequest="550"
-                    HorizontalOptions="Start"
-                    WidthRequest="300">
-
-                    <ImageButton
-                        Command="{Binding SeleccionarImagenCommand}"
-                        HeightRequest="130"
-                        Source="{Binding ImagenUrl}"
-                        WidthRequest="130" />
-
-                    <Label
-                        Margin="50,20,0,0"
-                        FontFamily="Nature"
-                        FontSize="15"
+                    <VerticalStackLayout
+                        Margin="20,0,0,0"
+                        HeightRequest="550"
                         HorizontalOptions="Start"
-                        Text="Peso:"
-                        TextColor="Black" />
+                        WidthRequest="300">
 
-                    <Entry
-                        Margin="50,5,0,0"
-                        BackgroundColor="LightGray"
-                        FontFamily="Comic Sans MS"
-                        FontSize="15"
-                        HorizontalOptions="Start"
-                        Keyboard="Numeric"
-                        Placeholder="Ingresa el peso del ejemplar"
-                        Text="{Binding Peso}"
-                        TextColor="Gray"
-                        WidthRequest="200" />
+                        <ImageButton
+                            Command="{Binding SeleccionarImagenCommand}"
+                            HeightRequest="130"
+                            Source="{Binding ImagenUrl}"
+                            WidthRequest="130" />
 
-                    <Label
-                        Margin="50,20,0,0"
-                        FontFamily="Nature"
-                        FontSize="15"
-                        HorizontalOptions="Start"
-                        Text="Tamaño:"
-                        TextColor="Black" />
-
-                    <Entry
-                        Margin="50,5,0,0"
-                        BackgroundColor="LightGray"
-                        FontFamily="Comic Sans MS"
-                        FontSize="15"
-                        HorizontalOptions="Start"
-                        Placeholder="Ingresa el tamaño del ejemplar"
-                        Text="{Binding Tamano}"
-                        TextColor="Gray"
-                        WidthRequest="200" />
-
-                    <Label
-                        Margin="50,20,0,0"
-                        FontFamily="Nature"
-                        FontSize="15"
-                        HorizontalOptions="Start"
-                        Text="Temperatura:"
-                        TextColor="Black" />
-                    <Picker
-                        Margin="50,5,0,0"
-                        BackgroundColor="LightGray"
-                        HorizontalOptions="Start"
-                        SelectedItem="{Binding Temperatura}"
-                        TextColor="Gray"
-                        WidthRequest="120">
-                        <Picker.Items>
-                            <x:String>-10°C</x:String>
-                            <x:String>-7°C</x:String>
-                            <x:String>-4°C</x:String>
-                            <x:String>-1°C</x:String>
-                            <x:String>2°C</x:String>
-                            <x:String>5°C</x:String>
-                            <x:String>8°C</x:String>
-                            <x:String>11°C</x:String>
-                            <x:String>14°C</x:String>
-                            <x:String>17°C</x:String>
-                            <x:String>20°C</x:String>
-                            <x:String>23°C</x:String>
-                            <x:String>26°C</x:String>
-                            <x:String>29°C</x:String>
-                            <x:String>32°C</x:String>
-                            <x:String>35°C</x:String>
-                            <x:String>38°C</x:String>
-                            <x:String>40°C</x:String>
-                        </Picker.Items>
-                    </Picker>
-
-
-
-
-                </VerticalStackLayout>
-
-
-                <VerticalStackLayout>
-                    <Label
-                        Margin="50,20,0,0"
-                        FontFamily="Nature"
-                        FontSize="15"
-                        HorizontalOptions="Start"
-                        Text="Especie:"
-                        TextColor="Black" />
-
-                    <Entry
-                        Margin="50,5,0,0"
-                        BackgroundColor="LightGray"
-                        FontFamily="Comic Sans MS"
-                        FontSize="15"
-                        HorizontalOptions="Start"
-                        Placeholder="Ingresa el nombre del ejemplar"
-                        Text="{Binding Nombre}"
-                        TextColor="Gray"
-                        WidthRequest="200" />
-
-                    <!--  Campo para la descripción  -->
-                    <Label
-                        Margin="50,10,0,0"
-                        FontFamily="Nature"
-                        FontSize="15"
-                        HorizontalOptions="Start"
-                        Text="Ubicacion:"
-                        TextColor="Black" />
-                    <Entry
-                        Margin="50,5,0,0"
-                        BackgroundColor="LightGray"
-                        FontFamily="Comic Sans MS"
-                        FontSize="15"
-                        HeightRequest="50"
-                        HorizontalOptions="Start"
-                        Placeholder="Ingresa la Ubicacion"
-                        Text="{Binding Ubicacion}"
-                        TextColor="Gray"
-                        WidthRequest="200" />
-
-                    <Label
-                        Margin="50,10,0,0"
-                        FontFamily="Nature"
-                        FontSize="15"
-                        HorizontalOptions="Start"
-                        Text="Fecha captura:"
-                        TextColor="Black" />
-                    <DatePicker
-                        Margin="50,5,0,0"
-                        BackgroundColor="LightGray"
-                        Date="{Binding Fecha, Mode=TwoWay}"
-                        FontFamily="Comic Sans MS"
-                        FontSize="15"
-                        HeightRequest="50"
-                        HorizontalOptions="Start"
-                        TextColor="Gray"
-                        WidthRequest="200" />
-
-                    <Label
-                        Margin="50,10,0,0"
-                        FontFamily="Nature"
-                        FontSize="15"
-                        HorizontalOptions="Start"
-                        Text="Clima:"
-                        TextColor="Black" />
-                    <Picker
-                        Margin="50,5,0,0"
-                        BackgroundColor="LightGray"
-                        HorizontalOptions="Start"
-                        SelectedItem="{Binding Clima}"
-                        TextColor="Gray"
-                        WidthRequest="120">
-                        <Picker.Items>
-                            <x:String>Soleado</x:String>
-                            <x:String>Nublado</x:String>
-                            <x:String>Lluvioso</x:String>
-                            <x:String>Tormenta</x:String>
-                            <x:String>Nevando</x:String>
-                            <x:String>Despejado</x:String>
-                            <x:String>Niebla</x:String>
-                            <x:String>Ventoso</x:String>
-                        </Picker.Items>
-                    </Picker>
-                    <Label
-                        Margin="50,10,0,0"
-                        FontFamily="Nature"
-                        FontSize="15"
-                        HorizontalOptions="Start"
-                        Text="Metodo de Pesca:"
-                        TextColor="Black" />
-
-                    <Entry
-                        Margin="50,5,0,0"
-                        BackgroundColor="LightGray"
-                        FontFamily="Comic Sans MS"
-                        FontSize="15"
-                        HorizontalOptions="Start"
-                        Placeholder="Ingresa el metodo de pesca empleado"
-                        Text="{Binding Metodo}"
-                        TextColor="Gray"
-                        WidthRequest="200" />
-
-                </VerticalStackLayout>
-
-
-                <VerticalStackLayout>
-
-                    <Label
-                        Margin="40,20,0,0"
-                        FontFamily="Nature"
-                        FontSize="15"
-                        Text="Equipamiento"
-                        TextColor="Black" />
-
-                    <Picker
-                        Margin="40,5,0,0"
-                        BackgroundColor="LightGray"
-                        HorizontalOptions="Start"
-                        ItemDisplayBinding="{Binding TipoEquipo}"
-                        ItemsSource="{Binding Equipamientos}"
-                        SelectedItem="{Binding Equipamiento, Mode=TwoWay}"
-                        TextColor="Gray"
-                        WidthRequest="120" />
-
-
-                    <Label
-                        Margin="40,30,0,0"
-                        FontFamily="Nature"
-                        FontSize="15"
-                        Text="Cebo"
-                        TextColor="Black" />
-
-                    <Picker
-                        Margin="40,5,0,0"
-                        BackgroundColor="LightGray"
-                        HorizontalOptions="Start"
-                        ItemDisplayBinding="{Binding TipoCebo}"
-                        ItemsSource="{Binding Cebos}"
-                        SelectedItem="{Binding Cebo, Mode=TwoWay}"
-                        TextColor="Gray"
-                        WidthRequest="120" />
-
-                    <StackLayout Orientation="Horizontal" Spacing="0">
                         <Label
-                            Margin="40,35,0,0"
+                            Margin="50,20,0,0"
                             FontFamily="Nature"
-                            FontSize="13"
-                            Text="¿Estaba lloviendo?"
+                            FontSize="15"
+                            HorizontalOptions="Start"
+                            Text="Peso:"
                             TextColor="Black" />
-                        <CheckBox
-                            Margin="5,20,0,0"
+
+                        <Entry
+                            Margin="50,5,0,0"
                             BackgroundColor="LightGray"
-                            IsChecked="{Binding Lloviendo}" />
-                    </StackLayout>
-                    <Button
-                        Margin="5,20,0,0"
-                        BackgroundColor="LightGreen"
-                        Command="{Binding CrearCapturaCommand}"
-                        FontFamily="Nature"
-                        Text="Crear"
-                        WidthRequest="120" />
-                    <Button
-                        Margin="5,20,0,0"
-                        BackgroundColor="LightCoral"
-                        Command="{Binding LimpiarFormularioCommand}"
-                        FontFamily="Nature"
-                        Text="Limpiar"
-                        WidthRequest="120" />
+                            FontFamily="Comic Sans MS"
+                            FontSize="15"
+                            HorizontalOptions="Start"
+                            Keyboard="Numeric"
+                            Placeholder="Ingresa el peso del ejemplar"
+                            Text="{Binding Peso}"
+                            TextColor="Gray"
+                            WidthRequest="200" />
 
-                </VerticalStackLayout>
+                        <Label
+                            Margin="50,20,0,0"
+                            FontFamily="Nature"
+                            FontSize="15"
+                            HorizontalOptions="Start"
+                            Text="Tamaño:"
+                            TextColor="Black" />
+
+                        <Entry
+                            Margin="50,5,0,0"
+                            BackgroundColor="LightGray"
+                            FontFamily="Comic Sans MS"
+                            FontSize="15"
+                            HorizontalOptions="Start"
+                            Placeholder="Ingresa el tamaño del ejemplar"
+                            Text="{Binding Tamano}"
+                            TextColor="Gray"
+                            WidthRequest="200" />
+
+                        <Label
+                            Margin="50,20,0,0"
+                            FontFamily="Nature"
+                            FontSize="15"
+                            HorizontalOptions="Start"
+                            Text="Temperatura:"
+                            TextColor="Black" />
+                        <Picker
+                            Margin="50,5,0,0"
+                            BackgroundColor="LightGray"
+                            HorizontalOptions="Start"
+                            SelectedItem="{Binding Temperatura}"
+                            TextColor="Gray"
+                            WidthRequest="120">
+                            <Picker.Items>
+                                <x:String>-10°C</x:String>
+                                <x:String>-7°C</x:String>
+                                <x:String>-4°C</x:String>
+                                <x:String>-1°C</x:String>
+                                <x:String>2°C</x:String>
+                                <x:String>5°C</x:String>
+                                <x:String>8°C</x:String>
+                                <x:String>11°C</x:String>
+                                <x:String>14°C</x:String>
+                                <x:String>17°C</x:String>
+                                <x:String>20°C</x:String>
+                                <x:String>23°C</x:String>
+                                <x:String>26°C</x:String>
+                                <x:String>29°C</x:String>
+                                <x:String>32°C</x:String>
+                                <x:String>35°C</x:String>
+                                <x:String>38°C</x:String>
+                                <x:String>40°C</x:String>
+                            </Picker.Items>
+                        </Picker>
 
 
 
 
-            </HorizontalStackLayout>
-        </VerticalStackLayout>
-    </Frame>
-        <ImageButton HorizontalOptions="End"
-                Margin="20"
-                WidthRequest="100"
-                HeightRequest="100"
-                  
-                Source="home.png"
-                ZIndex="100"
-                VerticalOptions="End"/>
+                    </VerticalStackLayout>
+
+
+                    <VerticalStackLayout>
+                        <Label
+                            Margin="50,20,0,0"
+                            FontFamily="Nature"
+                            FontSize="15"
+                            HorizontalOptions="Start"
+                            Text="Especie:"
+                            TextColor="Black" />
+
+                        <Entry
+                            Margin="50,5,0,0"
+                            BackgroundColor="LightGray"
+                            FontFamily="Comic Sans MS"
+                            FontSize="15"
+                            HorizontalOptions="Start"
+                            Placeholder="Ingresa el nombre del ejemplar"
+                            Text="{Binding Nombre}"
+                            TextColor="Gray"
+                            WidthRequest="200" />
+
+                        <!--  Campo para la descripción  -->
+                        <Label
+                            Margin="50,10,0,0"
+                            FontFamily="Nature"
+                            FontSize="15"
+                            HorizontalOptions="Start"
+                            Text="Ubicacion:"
+                            TextColor="Black" />
+                        <Entry
+                            Margin="50,5,0,0"
+                            BackgroundColor="LightGray"
+                            FontFamily="Comic Sans MS"
+                            FontSize="15"
+                            HeightRequest="50"
+                            HorizontalOptions="Start"
+                            Placeholder="Ingresa la Ubicacion"
+                            Text="{Binding Ubicacion}"
+                            TextColor="Gray"
+                            WidthRequest="200" />
+
+                        <Label
+                            Margin="50,10,0,0"
+                            FontFamily="Nature"
+                            FontSize="15"
+                            HorizontalOptions="Start"
+                            Text="Fecha captura:"
+                            TextColor="Black" />
+                        <DatePicker
+                            Margin="50,5,0,0"
+                            BackgroundColor="LightGray"
+                            Date="{Binding Fecha, Mode=TwoWay}"
+                            FontFamily="Comic Sans MS"
+                            FontSize="15"
+                            HeightRequest="50"
+                            HorizontalOptions="Start"
+                            TextColor="Gray"
+                            WidthRequest="200" />
+
+                        <Label
+                            Margin="50,10,0,0"
+                            FontFamily="Nature"
+                            FontSize="15"
+                            HorizontalOptions="Start"
+                            Text="Clima:"
+                            TextColor="Black" />
+                        <Picker
+                            Margin="50,5,0,0"
+                            BackgroundColor="LightGray"
+                            HorizontalOptions="Start"
+                            SelectedItem="{Binding Clima}"
+                            TextColor="Gray"
+                            WidthRequest="120">
+                            <Picker.Items>
+                                <x:String>Soleado</x:String>
+                                <x:String>Nublado</x:String>
+                                <x:String>Lluvioso</x:String>
+                                <x:String>Tormenta</x:String>
+                                <x:String>Nevando</x:String>
+                                <x:String>Despejado</x:String>
+                                <x:String>Niebla</x:String>
+                                <x:String>Ventoso</x:String>
+                            </Picker.Items>
+                        </Picker>
+                        <Label
+                            Margin="50,10,0,0"
+                            FontFamily="Nature"
+                            FontSize="15"
+                            HorizontalOptions="Start"
+                            Text="Metodo de Pesca:"
+                            TextColor="Black" />
+
+                        <Entry
+                            Margin="50,5,0,0"
+                            BackgroundColor="LightGray"
+                            FontFamily="Comic Sans MS"
+                            FontSize="15"
+                            HorizontalOptions="Start"
+                            Placeholder="Ingresa el metodo de pesca empleado"
+                            Text="{Binding Metodo}"
+                            TextColor="Gray"
+                            WidthRequest="200" />
+
+                    </VerticalStackLayout>
+
+
+                    <VerticalStackLayout>
+
+                        <Label
+                            Margin="40,20,0,0"
+                            FontFamily="Nature"
+                            FontSize="15"
+                            Text="Equipamiento"
+                            TextColor="Black" />
+
+                        <Picker
+                            Margin="40,5,0,0"
+                            BackgroundColor="LightGray"
+                            HorizontalOptions="Start"
+                            ItemDisplayBinding="{Binding TipoEquipo}"
+                            ItemsSource="{Binding Equipamientos}"
+                            SelectedItem="{Binding Equipamiento, Mode=TwoWay}"
+                            TextColor="Gray"
+                            WidthRequest="120" />
+
+
+                        <Label
+                            Margin="40,30,0,0"
+                            FontFamily="Nature"
+                            FontSize="15"
+                            Text="Cebo"
+                            TextColor="Black" />
+
+                        <Picker
+                            Margin="40,5,0,0"
+                            BackgroundColor="LightGray"
+                            HorizontalOptions="Start"
+                            ItemDisplayBinding="{Binding TipoCebo}"
+                            ItemsSource="{Binding Cebos}"
+                            SelectedItem="{Binding Cebo, Mode=TwoWay}"
+                            TextColor="Gray"
+                            WidthRequest="120" />
+
+                        <StackLayout Orientation="Horizontal" Spacing="0">
+                            <Label
+                                Margin="40,35,0,0"
+                                FontFamily="Nature"
+                                FontSize="13"
+                                Text="¿Estaba lloviendo?"
+                                TextColor="Black" />
+                            <CheckBox
+                                Margin="5,20,0,0"
+                                BackgroundColor="LightGray"
+                                IsChecked="{Binding Lloviendo}" />
+                        </StackLayout>
+                        <Button
+                            Margin="5,20,0,0"
+                            BackgroundColor="LightGreen"
+                            Command="{Binding CrearCapturaCommand}"
+                            FontFamily="Nature"
+                            Text="Crear"
+                            WidthRequest="120" />
+                        <Button
+                            Margin="5,20,0,0"
+                            BackgroundColor="LightCoral"
+                            Command="{Binding LimpiarFormularioCommand}"
+                            FontFamily="Nature"
+                            Text="Limpiar"
+                            WidthRequest="120" />
+
+                    </VerticalStackLayout>
+
+
+
+
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+        </Frame>
+        <ImageButton
+            Margin="20"
+            Command="{Binding AMenuCommand}"
+            HeightRequest="100"
+            HorizontalOptions="End"
+            Source="home.png"
+            VerticalOptions="End"
+            WidthRequest="100"
+            ZIndex="100" />
     </Grid>
 </ContentPage>

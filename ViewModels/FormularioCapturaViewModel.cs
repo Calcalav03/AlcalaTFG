@@ -83,7 +83,7 @@ namespace AlcalaTFG.ViewModels
             CapturaSelected = capturainfo;
 
             ImagenUrl = capturainfo.ImagenUrl;
-            //ImagenBytes = ConvertirImagenABase64(ImagenUrl);
+           // ImagenBytes = ConvertirImagenABase64(ImagenUrl);
             Tamano = capturainfo.Tamano;
             Peso = capturainfo.Peso;
             Nombre = capturainfo.Especie;
@@ -99,9 +99,15 @@ namespace AlcalaTFG.ViewModels
         [RelayCommand]
         public void CargarDatos()
         {
+
             RequestIdUsu();
             RequestCebos();
             RequestEquipamientos();
+        }
+
+        [RelayCommand]
+        public async Task AMenu() {
+            await Shell.Current.GoToAsync("//MenuPrincipal");
         }
 
         //METODO PARA OBTENER LOS CEBOS
@@ -230,10 +236,15 @@ namespace AlcalaTFG.ViewModels
 
                 if (Fecha == default)
                     errores.Add("La fecha es obligatoria.");
-                
-                 if (imagenBytes == null || imagenBytes.Length == 0)
+
+               // if (CapturaSelected == null)
+               // {
+                    if (ImagenBytes == null || ImagenBytes.Length == 0)
+                    {
                         errores.Add("La imagen es obligatoria.");
-                
+                    }
+                //}
+               
 
                 if (Temperatura == null)
                     errores.Add("La temperatura es obligatoria.");
@@ -253,6 +264,8 @@ namespace AlcalaTFG.ViewModels
                 CapturaDTO capturaDto;
                 if (CapturaSelected != null)
                 {
+                   
+
                     capturaDto = new CapturaDTO(
                         usuario: new CapturaDTO.UsuarioDto(Id), // Aquí creamos un nuevo objeto UsuarioDto directamente en el constructor
                         especie: Nombre,
@@ -269,9 +282,12 @@ namespace AlcalaTFG.ViewModels
                         },
                         metodosPescas: new HashSet<CapturaDTO.MetodosPescaDto> { new CapturaDTO.MetodosPescaDto(Metodo) } // Nuevo objeto de MetodosPescaDto
                     )
+                     
                     {
                         Id = CapturaSelected.Id
+                         
                     };
+                    
 
 
                 }
@@ -372,6 +388,8 @@ namespace AlcalaTFG.ViewModels
                 return null;
             }
         }
+
+        
 
         [RelayCommand]
         public async Task LimpiarFormulario()

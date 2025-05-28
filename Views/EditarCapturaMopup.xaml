@@ -6,7 +6,6 @@
     xmlns:local="clr-namespace:AlcalaTFG.Converter"
     xmlns:models="clr-namespace:AlcalaTFG.Models"
     xmlns:mopups="clr-namespace:Mopups.Pages;"
-    
     Title="EditarCapturaMopup">
 
     <mopups:PopupPage.Resources>
@@ -35,7 +34,7 @@
                 FontFamily="Nature"
                 FontSize="35"
                 HorizontalOptions="Center"
-                Text="¿Qué atrapaste hoy? 🐟🎣📝"
+                Text="¡Hora de mejorar tu captura! ✏️🐟"
                 TextColor="Black" />
 
             <HorizontalStackLayout>
@@ -131,12 +130,12 @@
 
 
 
-                    
+
                 </VerticalStackLayout>
 
-               
+
                 <VerticalStackLayout>
-                   
+
                     <Label
                         Margin="50,20,0,0"
                         FontFamily="Nature"
@@ -156,7 +155,7 @@
                         TextColor="Gray"
                         WidthRequest="200" />
 
-                    
+
                     <Label
                         Margin="50,10,0,0"
                         FontFamily="Nature"
@@ -242,7 +241,7 @@
 
 
                 <VerticalStackLayout>
-              
+
                     <Label
                         Margin="40,20,0,0"
                         FontFamily="Nature"
@@ -260,7 +259,7 @@
                         TextColor="Gray"
                         WidthRequest="120" />
 
-                    
+
                     <Label
                         Margin="40,30,0,0"
                         FontFamily="Nature"
@@ -295,7 +294,7 @@
                         BackgroundColor="LightGreen"
                         Command="{Binding CrearCapturaCommand}"
                         FontFamily="Nature"
-                        Text="Crear"
+                        Text="Editar"
                         WidthRequest="120" />
                     <Button
                         Margin="5,20,0,0"

@@ -89,6 +89,13 @@ namespace AlcalaTFG.ViewModels
             IsLoading = false;
         }
 
+        [RelayCommand]
+        public async Task AMenu()
+        {
+            await Shell.Current.GoToAsync("//MenuPrincipal");
+        }
+
+
 
 
     }
