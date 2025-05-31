@@ -76,9 +76,18 @@ namespace AlcalaTFG.ViewModels
         }
 
         [RelayCommand]
-        public async void DeleteCaptura()
+        public async Task DeleteCaptura()
         {
-           
+            bool confirmar = await App.Current.MainPage.DisplayAlert(
+                "Confirmar borrado",
+                "¿Seguro que quieres borrar esta captura?",
+                "Sí",
+                "No"
+            );
+
+            if (!confirmar)
+                return;
+
             string ruta = "http://localhost:8089/jpa/capturas/Borrar/" + CapturaSelected.Id;
 
             RequestModel requestModel = new RequestModel
@@ -88,7 +97,6 @@ namespace AlcalaTFG.ViewModels
                 Data = string.Empty
             };
 
-
             ResponseModel response = await APIService.ExecuteRequestJPA(requestModel);
             await App.Current.MainPage.DisplayAlert("Mensaje", response.Message, "Aceptar");
 
@@ -96,16 +104,17 @@ namespace AlcalaTFG.ViewModels
             {
                 try
                 {
-                    InitializeAsync();
-
+                    await InitializeAsync(); 
                 }
-                catch (Exception ex) { }
+                catch (Exception ex)
+                {
+                    
+                }
 
                 await MopupService.Instance.PopAllAsync();
-
-
             }
         }
+
 
         public CapturaUsuViewModel()
         {

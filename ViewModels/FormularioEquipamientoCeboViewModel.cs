@@ -90,7 +90,7 @@ namespace AlcalaTFG.ViewModels
         public async Task CrearEquipamiento()
         {
             string message = "Ocurrió un error al crear el Equipamiento: ";
-            string bien = "Cebo Equipamiento correctamente!";
+            string bien = "Equipamiento creado correctamente!";
 
             try
             {

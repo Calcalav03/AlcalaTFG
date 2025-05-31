@@ -20,43 +20,75 @@
                     Grid.Column="1"
                     Command="{Binding CambiarVistaFCCommand}"
                     HeightRequest="120"
-                    Source="fcaptura.png"
-                    WidthRequest="120" />
+                    WidthRequest="120"
+                    Source="fcaptura.png" >
+                    <ImageButton.Behaviors>
+                        <toolkit:TouchBehavior
+                            HoveredScale="1.1"
+                            PressedOpacity="0.8"
+                            PressedScale="0.8"
+                            />
+                    </ImageButton.Behaviors>
+                </ImageButton>
                 <ImageButton
                     Grid.Row="1"
                     Grid.Column="2"
                     Command="{Binding CambiarVistaFECCommand}"
                     HeightRequest="120"
                     Source="fce.png"
-                    WidthRequest="120" />
+                    WidthRequest="120">
+                    <ImageButton.Behaviors>
+                        <toolkit:TouchBehavior
+                            HoveredScale="1.1"
+                            PressedOpacity="0.8"
+                            PressedScale="0.8"
+                            />
+                    </ImageButton.Behaviors>
+                </ImageButton>
                 <ImageButton
                     Grid.Row="1"
                     Grid.Column="3"
                     Command="{Binding CambiarVistaGVCommand}"
                     HeightRequest="120"
                     Source="mostrartodos.png"
-                    WidthRequest="120" />
+                    WidthRequest="120">
+                    <ImageButton.Behaviors>
+                    <toolkit:TouchBehavior
+                        HoveredScale="1.1"
+                        PressedOpacity="0.8"
+                        PressedScale="0.8"
+                        />
+                    </ImageButton.Behaviors>
+                </ImageButton>
                 <ImageButton
                     Grid.Row="1"
                     Grid.Column="4"
                     Command="{Binding CambiarVistaCUCommand}"
                     HeightRequest="120"
                     Source="mostrarusu.png"
-                    WidthRequest="120" />
+                    WidthRequest="120">
+                    <ImageButton.Behaviors>
+                        <toolkit:TouchBehavior
+                            HoveredScale="1.1"
+                            PressedOpacity="0.8"
+                            PressedScale="0.8"
+                            />
+                    </ImageButton.Behaviors>
+                </ImageButton>
                 <ImageButton
                     Grid.Row="1"
                     Grid.Column="5"
                     Command="{Binding CambiarVistaLCommand}"
                     HeightRequest="120"
                     Source="irlogin.png"
-                    WidthRequest="120" />
+                    WidthRequest="120" Style="{StaticResource BotonAnimado}" />
                 <ImageButton
                     Grid.Row="1"
                     Grid.Column="6"
                     Command="{Binding ApagarCommand}"
                     HeightRequest="60"
                     Source="apagar.png"
-                    WidthRequest="60" />
+                    WidthRequest="60"  Style="{StaticResource BotonAnimado}"/>
 
 
 

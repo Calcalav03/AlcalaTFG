@@ -6,4 +6,7 @@ public partial class MenuPrincipal : ContentPage
 	{
 		InitializeComponent();
 	}
+   
+
+
 }

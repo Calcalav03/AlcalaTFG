@@ -12,51 +12,65 @@ namespace AlcalaTFG.ViewModels
 {
     public partial class MenuPrincipalViewModel: ObservableObject
     {
-
-
         [RelayCommand]
-        private async void CambiarVistaFC()
+        private async Task CambiarVistaFC()
         {
-            // Aquí navegas a otra vista (por ejemplo, a "NuevaVistaPage")
             await Shell.Current.GoToAsync("///FormularioCaptura");
         }
+
         [RelayCommand]
-        private async void CambiarVistaFEC()
+        private async Task CambiarVistaFEC()
         {
-            // Aquí navegas a otra vista (por ejemplo, a "NuevaVistaPage")
             await Shell.Current.GoToAsync("///FormularioCeboEquipamiento");
         }
-        [RelayCommand]
-        private async void CambiarVistaL()
-        {
-            // Borrar los datos del AuthService 
-            AuthService.Instance.ClearCredentials();
-
-            // Eliminar las credenciales almacenadas
-            SecureStorage.Remove("auth_token");
-            SecureStorage.Remove("user");
-
-            // Navegar a la vista de Login
-            await Shell.Current.GoToAsync("///Login");
-        }
 
         [RelayCommand]
-        private async void CambiarVistaGV()
+        private async Task CambiarVistaGV()
         {
-            // Aquí navegas a otra vista (por ejemplo, a "NuevaVistaPage")
             await Shell.Current.GoToAsync("///CapturaGlobalView");
         }
 
         [RelayCommand]
-        private async void CambiarVistaCU()
+        private async Task CambiarVistaCU()
         {
-            // Aquí navegas a otra vista (por ejemplo, a "NuevaVistaPage")
             await Shell.Current.GoToAsync("///CapturaUsuView");
         }
+
         [RelayCommand]
-        private async void Apagar()
+        private async Task CambiarVistaL()
         {
-            Application.Current.Quit();
+            bool cerrarSesion = await Shell.Current.DisplayAlert(
+                "Cerrar sesión",
+                "¿Estás seguro de que quieres cerrar sesión?",
+                "Sí",
+                "No"
+            );
+
+            if (cerrarSesion)
+            {
+                AuthService.Instance.ClearCredentials();
+                SecureStorage.Remove("auth_token");
+                SecureStorage.Remove("user");
+                await Shell.Current.GoToAsync("///Login");
+            }
         }
+
+        [RelayCommand]
+        private async Task Apagar()
+        {
+            bool salir = await Shell.Current.DisplayAlert(
+                "Salir de la aplicación",
+                "¿Estás seguro de que quieres salir?",
+                "Sí",
+                "No"
+            );
+
+            if (salir)
+            {
+                Application.Current.Quit();
+            }
+        }
+
+
     }
 }
