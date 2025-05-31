@@ -11,8 +11,8 @@ namespace AlcalaTFG.Models
     [Serializable]
     public class CeboDTO
     {
-        //[JsonProperty("id")]
-        //public int Id { get; set; }
+        [JsonProperty("id")]
+        public int? Id { get; set; }
 
         [JsonProperty("tipoCebo")]
         public string TipoCebo { get; set; }

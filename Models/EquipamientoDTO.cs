@@ -11,8 +11,8 @@ namespace AlcalaTFG.Models
     [Serializable]
     public class EquipamientoDTO
     {
-        //[JsonProperty("id")]
-        //public int Id { get; set; }
+        [JsonProperty("id")]
+        public int? Id { get; set; }
 
         [JsonProperty("tipoEquipo")]
         public string TipoEquipo { get; set; }
