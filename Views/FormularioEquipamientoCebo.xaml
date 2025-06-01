@@ -27,7 +27,7 @@
                     Radius="99" />
                 </VerticalStackLayout.Shadow>
 
-                <!--  Título  -->
+                
                 <Label
                 Margin="10"
                 FontFamily="Nature"
@@ -41,7 +41,7 @@
                 HeightRequest="400"
                 Spacing="30">
 
-                    <!--  Formulario de Equipamiento  -->
+                   
                     <VerticalStackLayout
                     Margin="20,0,0,0"
                     HorizontalOptions="Center"
@@ -109,7 +109,7 @@
                         </HorizontalStackLayout>
                     </VerticalStackLayout>
 
-                    <!--  Formulario de Cebo  -->
+                    
                     <VerticalStackLayout
                     Margin="0,0,20,0"
                     HorizontalOptions="Center"

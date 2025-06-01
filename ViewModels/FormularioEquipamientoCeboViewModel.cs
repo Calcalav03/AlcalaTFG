@@ -21,7 +21,7 @@ namespace AlcalaTFG.ViewModels
         [ObservableProperty]
         public string descripcion;
 
-        //METODO PARA CREAR EL CEBO
+        
         [RelayCommand]
         public async Task CrearCebo()
         {
@@ -41,7 +41,7 @@ namespace AlcalaTFG.ViewModels
                     Descripcion
                 );
 
-                // Crear el RequestModel
+               
                 var request = new RequestModel
                 {
                     Data = ceboDto,
@@ -49,10 +49,10 @@ namespace AlcalaTFG.ViewModels
                     Route = "http://localhost:8089/jpa/crearCebo"
                 };
 
-                // Enviar la solicitud al servidor
+               
                 ResponseModel response = await APIService.ExecuteRequestJPA(request);
 
-                // Mostrar el mensaje de respuesta
+                
                 await App.Current.MainPage.DisplayAlert("Mensaje", bien, "Aceptar");
 
 
@@ -85,7 +85,7 @@ namespace AlcalaTFG.ViewModels
         [ObservableProperty]
         public string modelo;
 
-        //METODO PARA CREAR EL EQUIPAMIENTO
+        
         [RelayCommand]
         public async Task CrearEquipamiento()
         {
@@ -106,7 +106,7 @@ namespace AlcalaTFG.ViewModels
                     Modelo
                 );
 
-                // Crear el RequestModel
+                
                 var request = new RequestModel
                 {
                     Data = equipamientoDto,
@@ -114,10 +114,10 @@ namespace AlcalaTFG.ViewModels
                     Route = "http://localhost:8089/jpa/crearEquipamiento"
                 };
 
-                // Enviar la solicitud al servidor
+                
                 ResponseModel response = await APIService.ExecuteRequestJPA(request);
 
-                // Mostrar el mensaje de respuesta
+                
                 await App.Current.MainPage.DisplayAlert("Mensaje", bien, "Aceptar");
 
 

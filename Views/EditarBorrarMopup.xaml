@@ -28,7 +28,7 @@
             WidthRequest="300">
 
             <VerticalStackLayout HorizontalOptions="Center" Spacing="20">
-                <!--  Imagen  -->
+                
                 <Frame
                     Padding="0"
                     BorderColor="#ccc"
@@ -43,7 +43,7 @@
                         WidthRequest="150" />
                 </Frame>
 
-                <!--  Nombre  -->
+                
                 <Label
                     FontAttributes="Bold"
                     FontSize="20"
@@ -51,7 +51,7 @@
                     Text="{Binding CapturaSelected.Especie}"
                     TextColor="Black" />
 
-                <!--  Botones Editar y Borrar  -->
+                
                 <HorizontalStackLayout HorizontalOptions="Center" Spacing="15">
                     <Button
                         BackgroundColor="#4CAF50"
@@ -71,7 +71,7 @@
                         WidthRequest="100" />
                 </HorizontalStackLayout>
 
-                <!--  Botón cerrar  -->
+               
                 <Button
                     BackgroundColor="#2196F3"
                     Clicked="OnCerrarClicked"

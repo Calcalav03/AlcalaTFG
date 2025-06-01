@@ -194,7 +194,7 @@ namespace AlcalaTFG.ViewModels
                 }
                 else
                 {
-                    // Si la API indica error o no hay datos, vaciamos la colección
+                    
                     CapturasUsu = new ObservableCollection<CapturaInfo>();
                     Debug.WriteLine("No se pudieron obtener las capturas o la respuesta fue vacía.");
                 }
@@ -202,7 +202,7 @@ namespace AlcalaTFG.ViewModels
             catch (Exception ex)
             {
                 Debug.WriteLine($"Error al deserializar las capturas: {ex.Message}");
-                CapturasUsu = new ObservableCollection<CapturaInfo>(); // Asegura que se limpia en caso de error
+                CapturasUsu = new ObservableCollection<CapturaInfo>(); 
             }
         }
 

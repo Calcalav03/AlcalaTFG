@@ -46,7 +46,7 @@
                     HeightRequest="550"
                     HorizontalOptions="Start"
                     WidthRequest="300">
-                    <!--  Selector de imagen  -->
+                   
                     <ImageButton
                         Command="{Binding SeleccionarImagenCommand}"
                         HeightRequest="130"

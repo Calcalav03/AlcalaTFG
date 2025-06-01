@@ -151,7 +151,7 @@
                             TextColor="Gray"
                             WidthRequest="200" />
 
-                        <!--  Campo para la descripción  -->
+                       
                         <Label
                             Margin="50,10,0,0"
                             FontFamily="Nature"

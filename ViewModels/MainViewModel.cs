@@ -47,14 +47,14 @@ namespace AlcalaTFG.ViewModels
                 Debug.WriteLine($"Token: {token}");
                 Debug.WriteLine($"UserLogin: {userlogin}");
 
-                // Guardar el userlogin y el token en el servicio de autenticación
+               
                 AuthService.Instance.SetUserCredentials(userlogin, token);
 
-                // Guardar el token de forma segura en SecureStorage
+               
                 await SecureStorage.SetAsync("auth_token", token);
                 await SecureStorage.SetAsync("user", userlogin);
 
-                // Asignar el userlogin a la propiedad del ViewModel
+                
                 UserLogin = userlogin;
 
                 JwtPayload payload = JwtUtils.DecodeJwtPayload(token);

@@ -25,8 +25,8 @@ namespace AlcalaTFG.ViewModels
     {
         [ObservableProperty]
         private string imagenUrl = "defecto.png";
-        // Ruta de imagen por defecto
-        private const string ImagenPorDefecto = "resource://AlcalaTFG.Resources.Images.defecto.png";
+        
+       
 
 
 
@@ -83,7 +83,7 @@ namespace AlcalaTFG.ViewModels
             CapturaSelected = capturainfo;
 
             ImagenUrl = capturainfo.ImagenUrl;
-            // ImagenBytes = ConvertirImagenABase64(ImagenUrl);
+           
             Tamano = capturainfo.Tamano;
             Peso = capturainfo.Peso;
             Nombre = capturainfo.Especie;
@@ -111,7 +111,7 @@ namespace AlcalaTFG.ViewModels
             await Shell.Current.GoToAsync("//MenuPrincipal");
         }
 
-        //METODO PARA OBTENER LOS CEBOS
+        
         [RelayCommand]
         public async void RequestCebos()
         {
@@ -180,7 +180,7 @@ namespace AlcalaTFG.ViewModels
 
 
 
-        //METODO PARA OBTENER LOS EQUIPAMIENTOS
+       
         [RelayCommand]
         public async void RequestEquipamientos()
         {
@@ -219,10 +219,10 @@ namespace AlcalaTFG.ViewModels
 
             try
             {
-                // Lista para acumular errores
+                
                 List<string> errores = new List<string>();
 
-                // Validación de cada campo
+                
                 if (string.IsNullOrWhiteSpace(Nombre))
                     errores.Add("El nombre de la especie es obligatorio.");
 
@@ -256,7 +256,7 @@ namespace AlcalaTFG.ViewModels
                 if (string.IsNullOrWhiteSpace(Metodo))
                     errores.Add("El método de pesca es obligatorio.");
 
-                // Si hay errores, los mostramos y salimos
+               
                 if (errores.Count > 0)
                 {
                     await App.Current.MainPage.DisplayAlert("Error", string.Join("\n", errores), "Aceptar");
@@ -266,20 +266,20 @@ namespace AlcalaTFG.ViewModels
                 if (CapturaSelected != null)
                 {
                     capturaDto = new CapturaDTO(
-                        usuario: new CapturaDTO.UsuarioDto(Id), // Aquí creamos un nuevo objeto UsuarioDto directamente en el constructor
+                        usuario: new CapturaDTO.UsuarioDto(Id), 
                         especie: Nombre,
                         peso: Peso,
                         tamano: Tamano,
                         ubicacion: Ubicacion,
                         fecha: Fecha.ToUniversalTime().AddDays(1),
-                        imagenUrl: ImagenUrl, // Asignar la imagen existente si no se proporciona una nueva
-                        cebos: new HashSet<CapturaDTO.CeboDto1> { new CapturaDTO.CeboDto1(Cebo.Id) }, // Nuevos objetos de CeboDto1
-                        equipamientos: new HashSet<CapturaDTO.EquipamientoDto1> { new CapturaDTO.EquipamientoDto1(Equipamiento.Id) }, // Nuevos objetos de EquipamientoDto1
+                        imagenUrl: ImagenUrl, 
+                        cebos: new HashSet<CapturaDTO.CeboDto1> { new CapturaDTO.CeboDto1(Cebo.Id) }, 
+                        equipamientos: new HashSet<CapturaDTO.EquipamientoDto1> { new CapturaDTO.EquipamientoDto1(Equipamiento.Id) }, 
                         climas: new HashSet<CapturaDTO.ClimaDto>
                         {
-                        new CapturaDTO.ClimaDto(Temperatura, Clima, Lloviendo) // Nuevo objeto de ClimaDto
+                        new CapturaDTO.ClimaDto(Temperatura, Clima, Lloviendo) 
                         },
-                        metodosPescas: new HashSet<CapturaDTO.MetodosPescaDto> { new CapturaDTO.MetodosPescaDto(Metodo) } // Nuevo objeto de MetodosPescaDto
+                        metodosPescas: new HashSet<CapturaDTO.MetodosPescaDto> { new CapturaDTO.MetodosPescaDto(Metodo) } 
                     )
 
                     {
@@ -290,28 +290,27 @@ namespace AlcalaTFG.ViewModels
                 }
                 else
                 {
-                    // Si no hay errores, creamos el objeto
+                   
                     capturaDto = new CapturaDTO(
-                        usuario: new CapturaDTO.UsuarioDto(Id), // Aquí creamos un nuevo objeto UsuarioDto directamente en el constructor
+                        usuario: new CapturaDTO.UsuarioDto(Id), 
                         especie: Nombre,
                         peso: Peso,
                         tamano: Tamano,
                         ubicacion: Ubicacion,
                         fecha: Fecha.ToUniversalTime().AddDays(1),
                         imagenUrl: Convert.ToBase64String(imagenBytes),
-                        cebos: new HashSet<CapturaDTO.CeboDto1> { new CapturaDTO.CeboDto1(Cebo.Id) }, // Nuevos objetos de CeboDto1
-                        equipamientos: new HashSet<CapturaDTO.EquipamientoDto1> { new CapturaDTO.EquipamientoDto1(Equipamiento.Id) }, // Nuevos objetos de EquipamientoDto1
+                        cebos: new HashSet<CapturaDTO.CeboDto1> { new CapturaDTO.CeboDto1(Cebo.Id) }, 
+                        equipamientos: new HashSet<CapturaDTO.EquipamientoDto1> { new CapturaDTO.EquipamientoDto1(Equipamiento.Id) }, 
                         climas: new HashSet<CapturaDTO.ClimaDto>
                         {
-                        new CapturaDTO.ClimaDto(Temperatura, Clima, Lloviendo) // Nuevo objeto de ClimaDto
-                        },
-                        metodosPescas: new HashSet<CapturaDTO.MetodosPescaDto> { new CapturaDTO.MetodosPescaDto(Metodo) } // Nuevo objeto de MetodosPescaDto
+                        new CapturaDTO.ClimaDto(Temperatura, Clima, Lloviendo)                         },
+                        metodosPescas: new HashSet<CapturaDTO.MetodosPescaDto> { new CapturaDTO.MetodosPescaDto(Metodo) } 
                     );
                 }
 
-                // Aquí puedes continuar con el proceso de guardado o cualquier otra lógica que necesites.
+               
 
-                // Crear el RequestModel
+                
                 var request = new RequestModel
                 {
                     Data = capturaDto,
@@ -319,10 +318,10 @@ namespace AlcalaTFG.ViewModels
                     Route = "http://localhost:8089/jpa/crearCaptura"
                 };
 
-                // Enviar la solicitud al servidor
+               
                 ResponseModel response = await APIService.ExecuteRequestJPA(request);
 
-                // Mostrar el mensaje de respuesta
+                
                 await App.Current.MainPage.DisplayAlert("Mensaje", bien, "Aceptar");
 
 
@@ -344,7 +343,7 @@ namespace AlcalaTFG.ViewModels
                 Debug.WriteLine(message + ex.Message);
             }
         }
-        // MÉTODO PARA SELECCIONAR LA IMAGEN
+       
         [RelayCommand]
         public async void SeleccionarImagen()
         {
@@ -361,12 +360,11 @@ namespace AlcalaTFG.ViewModels
             }
             else
             {
-                //ImagenUrl = ImagenPorDefecto; // Asignar la imagen por defecto si no se selecciona ninguna
-                //ImagenBytes = await ConvertirImagenABase64(ImagenUrl);
+                
             }
         }
 
-        // METODO PARA CONVERTIR LA IMAGEN A BYTE[]
+        
         private async Task<byte[]> ConvertirImagenABase64(string rutaImagen)
         {
             try
@@ -394,7 +392,7 @@ namespace AlcalaTFG.ViewModels
         {
             Peso = 0;
             Tamano = 0;
-            //Modelo = string.Empty;
+            
             Fecha = DateTime.Today;
             Temperatura = null;
             Nombre = string.Empty;

@@ -45,7 +45,7 @@
         VerticalTextAlignment="Center" />
         </Frame>
 
-        <!--  Indicador de carga  -->
+       
         <StackLayout
             Padding="20"
             BackgroundColor="#000000AA"
@@ -70,7 +70,7 @@
             VerticalOptions="Center" />
 
 
-        <!--  Capturas del usuario  -->
+        
         <CollectionView
             Margin="10,60,150,10"
             IsVisible="{Binding IsLoading, Converter={StaticResource InverseBoolConverter}}"

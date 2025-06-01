@@ -29,7 +29,7 @@
                 ColumnDefinitions="1*,1*,1*"
                 ColumnSpacing="20"
                 RowDefinitions="Auto">
-                <!--  Columna 1: Imagen + datos generales  -->
+                
                 <VerticalStackLayout
                     Grid.Column="0"
                     Margin="50,0,0,0"
@@ -73,7 +73,7 @@
                         TextColor="Black" />
                 </VerticalStackLayout>
 
-                <!--  Columna 2: Usuario, Cebos, Métodos  -->
+              
                 <VerticalStackLayout
                     Grid.Column="1"
                     Margin="50,0,0,0"
@@ -129,7 +129,7 @@
                     </CollectionView>
                 </VerticalStackLayout>
 
-                <!--  Columna 3: Equipamiento + Clima  -->
+               
                 <VerticalStackLayout
                     Grid.Column="2"
                     Margin="50,0,0,0"
@@ -191,7 +191,7 @@
 
         </Frame>
 
-        <!--  Botón Cerrar  -->
+      
         <Button
             Margin="0,10,0,10"
             BackgroundColor="#2196F3"
