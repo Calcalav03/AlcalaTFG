@@ -204,6 +204,9 @@ namespace AlcalaTFG.Models
 
         public class ClimaDto
         {
+            [JsonProperty("id")]
+            public int? Id { get; set; }
+
             [JsonProperty("temperatura")]
             public string Temperatura { get; set; }
 
@@ -213,8 +216,16 @@ namespace AlcalaTFG.Models
             [JsonProperty("lluvia")]
             public bool Lluvia { get; set; }
 
+            public ClimaDto(int? id, string temperatura, string nubosidad, bool lluvia)
+            {
+                Id = id;
+                Temperatura = temperatura;
+                Nubosidad = nubosidad;
+                Lluvia = lluvia;
+            }
             public ClimaDto(string temperatura, string nubosidad, bool lluvia)
             {
+                
                 Temperatura = temperatura;
                 Nubosidad = nubosidad;
                 Lluvia = lluvia;
@@ -241,11 +252,20 @@ namespace AlcalaTFG.Models
 
         public class MetodosPescaDto
         {
+            [JsonProperty("id")]
+            public int? Id { get; set; }
+
             [JsonProperty("metodo")]
             public string Metodo { get; set; }
 
-            public MetodosPescaDto(string metodo)
+            public MetodosPescaDto(int? id,string metodo)
             {
+                Id = id;
+                Metodo = metodo;
+            }
+            public MetodosPescaDto( string metodo)
+            {
+                
                 Metodo = metodo;
             }
 

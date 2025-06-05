@@ -89,10 +89,10 @@ namespace AlcalaTFG.ViewModels
             Nombre = capturainfo.Especie;
             Fecha = capturainfo.Fecha;
             Ubicacion = capturainfo.Ubicacion;
-            Metodo = capturainfo.MetodosPescas?.FirstOrDefault()?.Metodo;
-            Temperatura = capturainfo.Climas?.FirstOrDefault()?.Temperatura;
-            Clima = capturainfo.Climas?.FirstOrDefault()?.Nubosidad;
-            Lloviendo = capturainfo.Climas?.FirstOrDefault()?.Lluvia ?? false;
+            Metodo = capturainfo.MetodosPescas?.LastOrDefault()?.Metodo;
+            Temperatura = capturainfo.Climas?.LastOrDefault()?.Temperatura;
+            Clima = capturainfo.Climas?.LastOrDefault()?.Nubosidad;
+            Lloviendo = capturainfo.Climas?.LastOrDefault()?.Lluvia ?? false;
 
 
         }
@@ -266,24 +266,25 @@ namespace AlcalaTFG.ViewModels
                 if (CapturaSelected != null)
                 {
                     capturaDto = new CapturaDTO(
-                        usuario: new CapturaDTO.UsuarioDto(Id), 
+                        usuario: new CapturaDTO.UsuarioDto(Id),
                         especie: Nombre,
                         peso: Peso,
                         tamano: Tamano,
                         ubicacion: Ubicacion,
                         fecha: Fecha.ToUniversalTime().AddDays(1),
-                        imagenUrl: ImagenUrl, 
-                        cebos: new HashSet<CapturaDTO.CeboDto1> { new CapturaDTO.CeboDto1(Cebo.Id) }, 
-                        equipamientos: new HashSet<CapturaDTO.EquipamientoDto1> { new CapturaDTO.EquipamientoDto1(Equipamiento.Id) }, 
+                        imagenUrl: ImagenUrl,
+                        cebos: new HashSet<CapturaDTO.CeboDto1> { new CapturaDTO.CeboDto1(Cebo.Id) },
+                        equipamientos: new HashSet<CapturaDTO.EquipamientoDto1> { new CapturaDTO.EquipamientoDto1(Equipamiento.Id) },
                         climas: new HashSet<CapturaDTO.ClimaDto>
                         {
-                        new CapturaDTO.ClimaDto(Temperatura, Clima, Lloviendo) 
+                        new CapturaDTO.ClimaDto(CapturaSelected.Climas?.LastOrDefault()?.Id,Temperatura, Clima, Lloviendo) { }
                         },
-                        metodosPescas: new HashSet<CapturaDTO.MetodosPescaDto> { new CapturaDTO.MetodosPescaDto(Metodo) } 
+                        metodosPescas: new HashSet<CapturaDTO.MetodosPescaDto> { new CapturaDTO.MetodosPescaDto(CapturaSelected.MetodosPescas?.FirstOrDefault()?.Id, Metodo) }
                     )
 
                     {
                         Id = CapturaSelected.Id
+
 
                     };
 
@@ -303,7 +304,7 @@ namespace AlcalaTFG.ViewModels
                         equipamientos: new HashSet<CapturaDTO.EquipamientoDto1> { new CapturaDTO.EquipamientoDto1(Equipamiento.Id) }, 
                         climas: new HashSet<CapturaDTO.ClimaDto>
                         {
-                        new CapturaDTO.ClimaDto(Temperatura, Clima, Lloviendo)                         },
+                        new CapturaDTO.ClimaDto(Temperatura, Clima, Lloviendo) },
                         metodosPescas: new HashSet<CapturaDTO.MetodosPescaDto> { new CapturaDTO.MetodosPescaDto(Metodo) } 
                     );
                 }
@@ -320,9 +321,14 @@ namespace AlcalaTFG.ViewModels
 
                
                 ResponseModel response = await APIService.ExecuteRequestJPA(request);
+                if (capturaSelected != null)
+                {
+
+                    await App.Current.MainPage.DisplayAlert("Mensaje", "Captura editada con Exito.", "Aceptar");
+                } else
+                { await App.Current.MainPage.DisplayAlert("Mensaje", bien, "Aceptar"); }
 
                 
-                await App.Current.MainPage.DisplayAlert("Mensaje", bien, "Aceptar");
 
 
 

@@ -86,6 +86,9 @@ namespace AlcalaTFG.Models
 
         public class ClimaInfo
         {
+            [JsonProperty("id")]
+            public int Id { get; set; }
+
             [JsonProperty("temperatura")]
             public string Temperatura { get; set; }
 
@@ -98,6 +101,9 @@ namespace AlcalaTFG.Models
 
         public class MetodosPescaInfo
         {
+            [JsonProperty("id")]
+            public int Id { get; set; }
+
             [JsonProperty("metodo")]
             public string Metodo { get; set; }
         }
